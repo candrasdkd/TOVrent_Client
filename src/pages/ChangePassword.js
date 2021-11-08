@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { getEmailUser } from "../utils/https/Profile";
 import Footer from "../components/Footer";
-import CheckCode from "./CheckCode";
 
-function ChangePassword(props) {
+function ForgotPassword(props) {
   // const stateAuth = useSelector((state) => state.auth);
   // const dispatch = useDispatch();
-  const [change, setChange] = useState(false);
   const [email, setEmail] = useState("");
   // const [showMessage, setShowMessage] = useState(false);
   // const [errorMessage, setErrorMessage] = useState("");
@@ -23,10 +21,14 @@ function ChangePassword(props) {
     form.append("email", email);
     getEmailUser(form);
   };
+
   const onSubmit = () => {
     sendEmail();
-    setChange(true);
   };
+
+  // const checkCode = () => {
+
+  // };
   return (
     <>
       <main className="forgot-password-background">
@@ -42,34 +44,18 @@ function ChangePassword(props) {
               type="text"
               id="email"
               name="email"
-              placeholder="Enter your new password"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Confirm your new password"
+              placeholder="Enter your email adress"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
           </div>
           <div className="d-flex justify-content-center send-link">
-            <button className="btn-login-page mt-5" onClick={onSubmit}>
-              Change Password
-            </button>
-          </div>
-          <div className="resend-link text-center">
-            You will receive a link to reset your password. <br />
-            If you haven’t received any link, click&nbsp;
-            <span>
-              <Link to="#" className="resend-link-url">
-                Resend Link
-              </Link>
-            </span>
+            <Link to="/login">
+              <button className="btn-login-page mt-5" onClick={onSubmit}>
+                Confirm
+              </button>
+            </Link>
           </div>
         </div>
       </main>
@@ -78,4 +64,4 @@ function ChangePassword(props) {
   );
 }
 
-export default withRouter(ChangePassword);
+export default withRouter(ForgotPassword);

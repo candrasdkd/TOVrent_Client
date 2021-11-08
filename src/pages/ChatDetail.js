@@ -38,7 +38,6 @@ const ChatDetail = () => {
   };
 
   useEffect(() => {
-    // console.log(authRedux.authInfo)
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
@@ -47,7 +46,7 @@ const ChatDetail = () => {
         setMessageList((list) => [...list, data]);
       });
     };
-  }, []);
+  }, [socket]);
   return (
     <div>
       <Header />

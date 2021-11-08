@@ -23,10 +23,15 @@ function ForgotPassword(props) {
     form.append("email", email);
     getEmailUser(form);
   };
+
   const onSubmit = () => {
     sendEmail();
     setChange(true);
   };
+
+  // const checkCode = () => {
+
+  // };
   return (
     <>
       <main className="forgot-password-background">

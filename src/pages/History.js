@@ -91,7 +91,7 @@ class History extends Component {
     const token = this.props.auth.token;
     if (!this.state.selectedHistory)
       return Swal.fire("Please Choose History!", "", "error");
-    const form = new URLSearchParams();
+    // const form = new URLSearchParams();
     const id = Number(this.state.selectedHistory);
     Swal.fire({
       title: "Are you sure you want to delete that history?",
