@@ -1,0 +1,1991 @@
+/******* ========== MAIN GLOBAL ========== *******/
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+* {
+  font-family: Nunito;
+}
+a:link,
+a:hover,
+a:visited,
+a:active {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+html {
+  min-height: 100%; /* make sure it is at least as tall as the viewport */
+  position: relative;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.yellow-btn {
+  background-color: #ffcd61;
+  border: 1px solid#FFCD61;
+  padding: 6px 36px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.loader-modal {
+  display: flex;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  padding-top: 50vh;
+  z-index: 9999;
+}
+.loader {
+  display: flex;
+  justify-content: center;
+}
+.view-detail-loader {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+/******* ========== NAVBAR ========== *******/
+nav {
+  padding: 2vh 6% !important;
+}
+
+.btn-login,
+.btn-register,
+.btn-search {
+  background-color: white;
+  border: 1px solid#FFCD61;
+  padding: 6px 36px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.btn-register,
+.btn-search {
+  background-color: #ffcd61;
+}
+.mail-btn {
+  position: relative;
+  width: 40px;
+  height: 36px;
+  background-image: url(/src/assets/img/icon/mail-icon.png);
+  background-color: rgba(1, 1, 1, 0);
+  background-size: 100%;
+  border: none;
+}
+.mail-notif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: -10px;
+  background-color: #ffcd61;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-family: "Rubik", sans-serif;
+  font-size: 10px;
+}
+.btn-login:hover,
+.btn-register:hover,
+.btn-search:hover,
+.btn-save-profile:hover,
+.edit-profile:hover,
+.btn-pay:hover,
+button.reserve-from-detail:hover,
+.booking-code-btn:hover,
+.finish-payment-btn:hover,
+.delete-btn:hover {
+  box-shadow: 0px 0px 20px rgba(251, 143, 29, 0.4);
+}
+.profile-photo {
+  background-position: 0% 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.profile-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+a.dropdown-toggle.nav-link::after,
+a.dropdown-toggle.nav-link::before {
+  border: none;
+}
+.dropdown-menu.show {
+  padding: 33px 24px 8px 24px !important;
+}
+
+div.profile-icon > .dropdown-menu[data-bs-popper] {
+  left: -100px;
+  margin-top: 1.5rem;
+}
+.logout-btn {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+}
+div.mail-dropdown > .dropdown-menu[data-bs-popper] {
+  left: -300px;
+  margin-top: 1.5rem;
+  min-width: 200px;
+}
+.navbar-nav > a {
+  padding: 5px 1rem;
+  color: #a8a8a8;
+  transition: 0.3s;
+}
+.navbar-nav > a:hover {
+  color: black;
+}
+.navbar-nav > a.active {
+  color: black;
+  font-weight: 700;
+}
+.header-display-none {
+  display: none;
+}
+.confirm-logout {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.confirm-logout-box {
+  padding: 4vw 6vw;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+/******* ========== HOME ========== *******/
+.home-page > main > section {
+  padding: 2rem 6%;
+}
+.header-title {
+  margin-right: auto;
+}
+.none {
+  display: none;
+}
+.bg-home {
+  height: 767px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("/src/assets/img/bg-home.png");
+}
+/* .bg-opacity {
+  background-color: rgba(42, 35, 35, 0.25);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+} */
+.home-container {
+  color: white;
+}
+rect {
+  fill: #f5f5f6;
+}
+.title-home {
+  font-size: 64px;
+  width: 356px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: #f5f5f6;
+}
+.subtitle-home {
+  padding-top: 74px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #f5f5f6;
+}
+.item1 {
+  grid-area: search;
+}
+.item2 {
+  grid-area: location;
+}
+.item3 {
+  grid-area: type;
+}
+
+.width-dropdown {
+  width: min-content;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "search search"
+    "location type";
+  grid-gap: 35px;
+}
+.item1,
+.item2,
+.item3 {
+  padding: 10px 30px;
+  border-radius: 6px;
+  opacity: 0.5;
+  width: 250px;
+  color: #4a4c53;
+  font-weight: 600;
+}
+.search-home {
+  width: 100%;
+}
+.btn-search {
+  width: 100%;
+  height: 100%;
+  color: #393939;
+  font-weight: 600;
+}
+.btn-search-container {
+  margin-top: 51px;
+  width: 180px;
+  height: 52px;
+}
+
+.popular-title-container {
+  padding-bottom: 60px;
+}
+.popular-title {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+a.text-view {
+  display: flex;
+  align-items: center;
+  color: #fb8f1d !important;
+  transition: 0.3s;
+}
+.text-view:hover {
+  color: #ffcd61 !important;
+}
+
+.card-image > image {
+  width: 100%;
+}
+.card-image {
+  background-position: center;
+  border-radius: 8px;
+  width: 261px;
+  height: 332px;
+  margin: 10px 10px;
+  padding: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
+}
+.name-card-text {
+  position: relative;
+  top: 5%;
+  background-color: white;
+  width: 120px;
+  height: 56px;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 6px 6px 6px 6px;
+  padding-top: 6px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
+}
+.green-circle {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #bff0dd, #57d2a3);
+}
+.white-circle {
+  position: absolute;
+  background: white;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+.container-testimonials {
+  display: flex;
+}
+.testimonials-title {
+  font-size: 36px;
+  font-family: "Playfair Display", serif;
+  margin-bottom: 43px;
+  font-weight: 700;
+}
+.review {
+  padding: 75px 0;
+  flex-grow: 1;
+}
+.review-text {
+  padding-top: 1.5em;
+  padding-bottom: 3em;
+  width: 450px;
+  font-size: 24px;
+}
+.founder-circle {
+  font-weight: 700;
+  font-size: 22px;
+}
+.founder-circle > span {
+  font-weight: 400;
+  font-size: 18px;
+}
+.review-photo-container {
+  flex-grow: 1;
+}
+.big-green-circle {
+  top: -21px;
+  right: -21px;
+  position: absolute;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #bff0dd, #57d2a3);
+  z-index: -1;
+}
+.big-white-circle {
+  position: absolute;
+  background: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.review-photo {
+  position: relative;
+  width: 384px;
+  height: 491px;
+  background-image: url("/src/assets/img/founder-circle.jpg");
+  border-radius: 14px;
+  background-size: 195%;
+  background-position: 40% 0%;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px rgba(161, 154, 154, 0.25);
+}
+.plus-vector {
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+}
+.white-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 132px;
+  height: 60px;
+  background-color: white;
+  border-radius: 16px 0px 0px 0px;
+}
+.left-button,
+.right-button {
+  position: relative;
+  border: none;
+  background-color: white;
+  margin-top: 20px;
+  margin-left: 10%;
+}
+.left-arrow,
+.right-arrow {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 15px;
+  height: 15px;
+  left: 40%;
+  top: 40%;
+}
+.left-arrow {
+  background-image: url(/src/assets/img/icon/Vector-left-arrow.png);
+}
+.right-arrow {
+  background-image: url(/src/assets/img/icon/Vector-right-arrow.png);
+}
+.btn-add-container {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  padding: 2% 15%;
+}
+.add-vehicle-home {
+  border-radius: 1rem;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 600;
+  background-color: #ffcd61;
+}
+
+/******* ========== AUTH/LOGIN ========== *******/
+.login-background {
+  background-image: url(/src/assets/img/popular3.jpg);
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  /* height: 100vh; */
+}
+.shadow-container {
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  padding: 107px 10%;
+}
+.padding-register {
+  padding: 50px 6%;
+}
+.sign-up {
+  justify-content: center;
+  display: flex;
+}
+.login-title {
+  font-family: "Playfair Display", serif;
+  color: white;
+  font-weight: 700;
+  font-size: 64px;
+}
+.no-account {
+  font-weight: 900;
+  color: white;
+  font-size: 24px;
+  margin: 4rem 0 2rem 0;
+}
+.sign-up-btn-custom {
+  width: 391px;
+  height: 79px;
+  border-radius: 10px;
+  background: rgba(57, 57, 57, 1);
+  color: rgba(255, 205, 97, 1);
+  font-weight: 900;
+  font-size: 24px;
+  margin-bottom: 9rem;
+  transition: 0.3s;
+}
+.sign-up-btn-custom:hover,
+.sign-up-btn-custom:active,
+.btn-edit-pass:hover,
+button.chat-admin:hover {
+  box-shadow: 0px 0px 20px rgba(37, 20, 2, 0.4);
+}
+.line {
+  border-left: 1px solid white;
+  height: auto;
+  width: 1px;
+  margin: 0px 3rem;
+}
+.login-field > form > input,
+.email-forgot > input[type="text"] {
+  background: rgba(255, 255, 255, 0.26);
+  width: 447px;
+  height: 79px;
+  padding: 12px 20px;
+  margin-top: 34px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 24px;
+}
+.login-field > form > input::placeholder,
+.email-forgot > input[type="text"]::placeholder {
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+}
+.forgot-password {
+  padding: 14px 0 49px 0px;
+}
+.forgot-password > a {
+  font-size: 18px;
+  color: white !important;
+  font-family: Mulish, sans-serif;
+}
+.btn-login-page {
+  background-color: #ffcd61;
+  width: 446px;
+  height: 79px;
+  font-size: 24px;
+  border-radius: 10px;
+  font-weight: 900;
+  transition: 0.3s;
+}
+.btn-login-with-google {
+  background-color: white;
+  width: 446px;
+  height: 79px;
+  font-size: 24px;
+  border-radius: 10px;
+  font-weight: 900;
+  margin-top: 57px;
+  transition: 0.3s;
+}
+.btn-login-with-google > img {
+  width: 33px;
+  height: 31px;
+}
+.btn-login-page:hover,
+.btn-login-page:active {
+  box-shadow: 0px 0px 20px rgba(251, 143, 29, 0.4);
+}
+.btn-login-with-google:hover,
+.btn-login-with-google:active {
+  box-shadow: 0px 0px 10px white;
+}
+
+/******* ========== FORGOT ========== *******/
+
+.forgot-password-background {
+  height: 758px;
+  background-image: url(/src/assets/img/forgot-password.jpg);
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+.back-arrow {
+  background-image: url(/src/assets/img/icon/white-arrow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.back-arrow > span {
+  color: white;
+  font-weight: 700;
+  size: 24px;
+  margin-left: 2rem;
+}
+.forgot-title {
+  font-family: "Playfair Display";
+  font-weight: 700;
+  font-size: 64px;
+  padding-top: 40px;
+}
+.email-forgot {
+  padding-top: 83px;
+  font-size: 24px;
+}
+.email-forgot > input[type="text"] {
+  text-align: center;
+  border: none;
+}
+.send-link {
+  flex: 1;
+}
+a:link.resend-link-url,
+a:hover.resend-link-url,
+a:visited.resend-link-url,
+a:active.resend-link-url {
+  font-weight: 900;
+  text-decoration: underline;
+  color: white;
+}
+
+/******* ========== PROFILE ========== *******/
+.profile-container {
+  padding: 69px 6%;
+}
+.profile-title {
+  font-weight: 700;
+  font-size: 36px;
+}
+.profile-display {
+  height: 218px;
+  border-radius: 50%;
+  width: 218px;
+  object-fit: cover;
+}
+.profile-display-container {
+  width: 278px;
+  height: 218px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.edit-profile {
+  background: #ffcd61;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  position: absolute;
+  top: 160px;
+  right: 25px;
+}
+.edit-icon {
+  background-image: url(/src/assets/img/icon/pen.png);
+  background-position: center;
+  background-size: contain;
+  width: 40%;
+  height: 40%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: none;
+  margin: auto;
+}
+.profile-name {
+  font-size: 48px;
+  font-family: "Playfair Display";
+  font-weight: 700;
+}
+p.profile-desc {
+  color: #b8becd;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+.gender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.gender-container {
+  text-align: left;
+  display: block;
+  position: relative;
+  margin: 0 86px 12px 86px;
+  cursor: pointer;
+  font-size: 24px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 49px;
+}
+/* Hide the browser's default radio button */
+.gender-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background-color: #eee;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+/* On mouse-over, add a grey background color */
+.gender-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+/* When the radio button is checked, add a background */
+.gender-container input:checked ~ .checkmark {
+  background-color: #393939;
+}
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+/* Show the indicator (dot/circle) when checked */
+.gender-container input:checked ~ .checkmark:after {
+  display: block;
+}
+/* Style the indicator (dot/circle) */
+.gender-container .checkmark:after {
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffcd61;
+}
+
+.profile-fields {
+  font-size: 24px;
+}
+.profile-fields-title {
+  font-weight: 900;
+  padding-top: 5rem;
+}
+.profile-fields-subtitle {
+  color: #9f9f9f;
+  padding-top: 29px;
+  font-size: 24px;
+}
+.profile-fields > div > input[type="text"],
+.identity-flex > input[type="text"],
+.identity-flex > input[type="date"],
+.profile-fields > div > input[type="number"] {
+  width: 100%;
+  padding: 26px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+.identity-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.edit-profile-button > div > a > button {
+  width: 322px;
+  height: 89px;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: 24px;
+  border: none;
+  padding: 0;
+  transition: 0.3s;
+}
+.btn-save-profile {
+  background: #ffcd61;
+}
+.btn-edit-pass {
+  background: #393939;
+  color: #ffcd61;
+}
+.btn-cancel:hover {
+  color: #ffb618;
+}
+
+/******* ========== RESERVATION ========== *******/
+
+main.reserve-container {
+  padding: 69px 6%;
+}
+.reservation-title {
+  font-weight: 700;
+  font-size: 2rem;
+}
+.reservation-title > a > img {
+  width: 18px;
+  height: 30px;
+}
+.reservation-title > span {
+  margin-left: 2rem;
+}
+.reserve-detail {
+  padding: 121px 0 60px 0;
+}
+.reserve-pic {
+  width: 696px;
+  height: 616px;
+  border-radius: 10px;
+  background-image: url(../img/reserve.webp);
+  background-size: 135%;
+  background-position: 45% 0%;
+}
+.product-reserve {
+  margin-left: 30px;
+}
+.reserve-vehicle-name {
+  font-family: "Playfair Display";
+  font-weight: 900;
+  font-size: 3rem;
+}
+.reserve-vehicle-name > span {
+  font-weight: 400;
+  font-size: 36px;
+  font-family: "Playfair Display";
+}
+.reserve-amount > button,
+.reserve-amount > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 2rem;
+}
+.rmv-btn,
+.add-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+.rmv-btn {
+  background: #efefef;
+}
+.add-btn {
+  background: #ffcd61;
+}
+.reserve-date-title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+input.reserve-date[type="date"],
+.product-reserve > select {
+  width: 100%;
+  padding: 26px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background: rgba(57, 57, 57, 0.1);
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  color: #80918e;
+}
+
+.btn-pay {
+  width: 100%;
+  height: 89px;
+  font-size: 24px;
+  background: #ffcd61;
+  border-radius: 10px;
+  border: none;
+  transition: 0.3s;
+  font-weight: 900;
+}
+/******* ========== CHAT DETAIL ========== *******/
+.chat-window .chat-body {
+  height: 600px;
+  /* border: 1px solid #263238; */
+  background: #fff;
+  position: relative;
+  margin: 0 4%;
+}
+.chat-window .chat-body .message-container {
+  width: 100%;
+  height: 100%;
+  /* overflow-y: auto;
+  overflow-x: hidden; */
+}
+
+.chat-window .chat-body .message-container::-webkit-scrollbar {
+  display: none;
+}
+.chat-window .chat-body .message {
+  height: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.chat-window .chat-body .message .message-content {
+  width: auto;
+  height: auto;
+  min-height: 40px;
+  max-width: 600px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+#you {
+  justify-content: flex-end;
+}
+
+#you .message-content {
+  font-size: 24px;
+  justify-content: center;
+  background-color: #393939;
+  color: #ffcd61;
+  width: 100%;
+  padding: 5%;
+}
+#you .message-content > p {
+  margin: 0;
+  width: auto;
+}
+#you .message-meta {
+  justify-content: flex-end;
+  text-align: end;
+}
+#other {
+  justify-content: flex-start;
+}
+
+#other .message-content {
+  font-size: 24px;
+  font-weight: 600;
+  justify-content: center;
+  background-color: #ffcd61;
+  color: #393939;
+  width: 100%;
+  padding: 3%;
+}
+#other .message-content > p {
+  margin: 0;
+}
+#other .message-meta {
+  justify-content: flex-end;
+}
+/******* ========== VEHICLE TYPE ========== *******/
+main.vehicles-container {
+  padding: 69px 6%;
+}
+.search-form,
+.location-form {
+  background: rgba(255, 255, 255, 0.26);
+  width: 38%;
+  height: 79px;
+  padding: 12px 20px;
+  margin-top: 34px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  box-sizing: border-box;
+  margin-bottom: 5rem;
+}
+.location-form,
+.btn-search-vehicle {
+  margin-left: 2%;
+}
+.btn-search-vehicle {
+  background-color: #ffcd61;
+  width: 20%;
+  height: 79px;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.search-from::placeholder {
+  color: #b8becd;
+  font-weight: 400;
+}
+
+/******* ========== MORE DETAIL ========== *******/
+
+.detail-pic-container {
+  flex: 3;
+}
+.more-detail-container {
+  flex: 2;
+}
+.more-detail-big-pic {
+  width: 45vw;
+  height: 35vw;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
+}
+.remove-btn-style {
+  border: none;
+  background-color: transparent;
+}
+.small-arrow {
+  height: 31px;
+  width: 22px;
+}
+.more-detail-small-pic {
+  width: 233px;
+  height: 158px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
+}
+.flip-image {
+  transform: scaleX(-1);
+}
+.available-color {
+  color: #087e0d;
+  font-size: 24px;
+  font-weight: 700;
+}
+.not-available-color {
+  color: #b80d0d;
+  font-size: 24px;
+  font-weight: 700;
+}
+.detail-text {
+  font-size: 24px;
+}
+.detail-btn-container {
+  margin-top: 1rem;
+}
+.detail-btn-container > a > button {
+  transition: 0.3s;
+  height: 89px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 24px;
+  width: 100%;
+  border: none;
+}
+button.chat-admin,
+button.like-btn {
+  background: #393939;
+  color: #ffcd61;
+}
+button.reserve-from-detail {
+  background-color: #ffcd61;
+}
+button.like-btn > img {
+  height: 52px;
+  width: 52px;
+  margin-right: 27px;
+}
+a.like-btn {
+  flex: 1.5;
+}
+a.reserve-from-detail {
+  flex: 3;
+}
+a.chat-admin {
+  flex: 3;
+}
+
+/******* ========== PAYMENT ========== *******/
+
+div.payment-pic {
+  flex: 2;
+}
+div.payment-title-container {
+  flex: 3;
+}
+img.payment-pic {
+  width: 30rem;
+  height: 20rem;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.booking-code {
+  font-weight: 700;
+  font-size: 36px;
+  font-family: "Playfair Display";
+}
+.booking-code-btn {
+  transition: 0.3s;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 24px;
+  border: none;
+  background: #ffcd61;
+}
+.payment-main > div.payment-row-1 > div,
+.payment-main > div.payment-row-2 > div {
+  font-size: 24px;
+  border: 1px solid #80918e;
+  border-radius: 10px;
+}
+.payment-row-1 > div,
+.payment-row-2 > div {
+  margin: 1rem;
+  padding: 42px 98px;
+}
+.order-details-container,
+.payment-quantity {
+  flex: 2;
+}
+.payer-identity-container,
+.reservation-date {
+  flex: 3;
+}
+.payment-row-3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.payment-code-container {
+  flex: 3;
+}
+.payment-methods {
+  flex: 2;
+}
+.payment-code-title {
+  font-size: 32px;
+  margin: 1rem;
+}
+.payment-code {
+  flex: 1;
+}
+.payment-code,
+select.payment-methods {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  margin: 1rem;
+  padding: 28px 33px;
+  font-weight: 700;
+  color: #80918e;
+}
+.payment-copy {
+  padding: 0 34px;
+  color: #ffcd61;
+  background-color: #393939;
+  font-weight: 700;
+  height: 42px;
+  border-radius: 10px;
+}
+.finish-payment-btn {
+  width: 100%;
+  height: 89px;
+  background: #ffcd61;
+  border-radius: 10px;
+  transition: 0.3s;
+  font-weight: 900;
+  font-size: 24px;
+  border: none;
+}
+.pay-before {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: red;
+}
+
+/******* ========== CHAT DETAIL ========== *******/
+
+.chat-detail-profile-icon {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  border-radius: 50%;
+  margin-left: 5%;
+}
+.chat-item {
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  padding: 35px;
+}
+.chat-item-pic,
+.chat-item-details,
+.chat-item-name {
+  flex: 1;
+  margin: 0 1rem;
+}
+.chat-item-pic > img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.chat-item-name {
+  font-family: "Playfair Display";
+  font-weight: 900;
+  font-size: 36px;
+}
+.chats {
+  font-size: 24px;
+}
+.chat-user,
+.chat-renter {
+  border-radius: 10px;
+  padding: 31px 50px;
+}
+.chat-user {
+  color: #ffcd61;
+  background: #393939;
+}
+.time-delivered {
+  margin: 5px 0px;
+  color: #b8becd;
+}
+.chat-renter {
+  background: #ffcd61;
+}
+.chat-section {
+  position: relative;
+}
+.chat-form {
+  font-size: 24px;
+  margin: 0 4%;
+}
+.chat-form > input {
+  width: 100%;
+  padding: 30px 55px;
+  background: #f6f6f6;
+  border-radius: 10px;
+  color: black;
+  border: none;
+}
+.chat-form > input::placeholder {
+  font-weight: 400;
+  color: #b8becd;
+  opacity: 1;
+}
+.chat-section > button {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  border: none;
+  background-color: transparent;
+}
+.chat-section > button > img {
+  height: 40px;
+  width: 40px;
+}
+
+/******* ========== HISTORY ========== *******/
+.search-container {
+  margin-bottom: 1rem;
+}
+.history-main {
+  font-size: 20px;
+  padding: 69px 6%;
+}
+.flex-grow-7 {
+  flex: 7;
+}
+.history-checkbox {
+  flex: 1;
+}
+.search-form-history {
+  border: 0.5px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 18px;
+  padding: 0.75rem;
+  background: rgba(218, 218, 218, 0.27);
+}
+.history-checkbox > form-check-input {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+.filter > select {
+  width: 23%;
+  border: 0.5px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 0.75rem;
+  background: rgba(218, 218, 218, 0.27);
+}
+.filter > select > option {
+  border-bottom: 1px;
+}
+.time-stamp {
+  color: #c4c4c4;
+  padding: 1.5rem 0;
+}
+.history-item {
+  margin: 1rem 0;
+}
+
+.history-item > div > img {
+  height: 22px;
+  width: 14px;
+}
+.form-check-input {
+  margin: 0;
+}
+
+.history-detail {
+  flex: 2;
+}
+.history-test {
+  width: 197px;
+  height: 165px;
+  background-size: cover;
+  border-radius: 20px;
+  margin-right: 3rem;
+}
+.new-arrival {
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  padding: 2rem;
+  margin-left: 2%;
+}
+.new-arrival-title {
+  font-family: "Playfair Display";
+  font-weight: 900;
+  font-size: 24px;
+}
+.delete-btn {
+  background: #ffcd61;
+  border: none;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 100%;
+  margin: 1rem 0;
+  font-weight: 700;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+img.view-more-new-arrival {
+  transform: rotate(-90deg);
+  height: 43px;
+  width: 25px;
+}
+.history-status-true {
+  color: #087e0d;
+}
+.history-status-false {
+  color: #9b0a0a;
+}
+.new-arrival-items {
+  flex-wrap: wrap;
+}
+
+/******* ========== ADD VEHICLE ========== *******/
+.add-vehicle-main {
+  padding: 3rem 6%;
+}
+.add-image-container {
+  flex: 1 1;
+  color: #b8becd;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.add-vehicle-detail-container {
+  flex: 1;
+}
+.add-image-container > .add-main-image,
+.add-image-container > .add-alt-image-container > div {
+  border-radius: 10px;
+  background-color: #f5f5f6;
+}
+.add-alt-image-container {
+  margin-top: 1rem;
+}
+.add-main-image {
+  width: 35vw;
+  height: 30vw;
+  min-width: 20vw;
+  min-height: 20vw;
+  background-position: center;
+  object-fit: cover;
+  background-size: cover;
+  position: relative;
+  box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
+}
+.add-main-image > img {
+  width: 10vw;
+  height: 10vw;
+}
+.add-alt-image1 {
+  margin: 0 1rem 0 0;
+  background-position: center;
+  background-size: cover;
+}
+.add-alt-image1,
+.add-alt-image2 {
+  width: 15vw;
+  height: 10vw;
+  position: relative;
+}
+.add-alt-image1 > img {
+  width: 5vw;
+  height: 5vw;
+}
+.add-alt-image2 > div {
+  font-weight: 900;
+  font-size: 2rem;
+}
+.second-pic-edit {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+.cam-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 15vw;
+  height: 10vw;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+}
+.cam-icon {
+  width: 80px;
+}
+.add-vehicle-detail-container > input {
+  border-width: 0 0 1px 0;
+  margin-bottom: 1rem;
+}
+.add-vehicle-detail-container > input:focus-visible {
+  outline: none;
+}
+.add-vehicle-detail-container > div > input.vehiclePrice,
+.vehicle-status {
+  border: none;
+  border-radius: 10px;
+  background-color: #f5f5f6;
+  padding: 1rem 1rem;
+  width: 36%;
+}
+.add-vehicle-detail-container > div > p,
+.vehicle-stock > p {
+  font-family: "Playfair Display";
+  font-weight: 700;
+}
+.vehicle-stock {
+  margin-top: 1rem;
+}
+.vehicle-stock > p {
+  flex: 1;
+}
+.vehicle-stock > div {
+  flex: 1;
+}
+.add-vehicle-button > select,
+.add-vehicle-button > button {
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.add-location {
+  background: #f5f5f6;
+  border-radius: 10px;
+  height: 70px;
+  width: 36%;
+  color: #393939;
+  padding: 1rem 1rem;
+}
+.option-add-vehicle {
+  background: #f5f5f6;
+  color: #000;
+  border-radius: 10px;
+}
+.add-item-button {
+  flex: 2;
+  margin: 0 4rem 0 0;
+  border-radius: 10px;
+  background: #393939;
+  color: #ffcd61;
+}
+.save-item-button {
+  flex: 3;
+  margin: 0 1rem 0 4rem;
+  border-radius: 10px;
+  background: #ffcd61;
+  color: #393939;
+  height: 90px;
+  width: 200px;
+}
+.error {
+  background: rgba(0, 0, 0, 0.4);
+}
+@media (max-width: 1200px) {
+  .add-vehicle-container {
+    flex-direction: column !important;
+  }
+}
+@media (max-width: 992px) {
+  .error {
+    margin: 0 21%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+@media (max-width: 768px) {
+  .error {
+    margin: 0 16%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .add-main-image {
+    width: 300px;
+    height: 250px;
+  }
+  .add-main-image > img {
+    width: 75px;
+    height: 75px;
+  }
+  .add-alt-image1,
+  .add-alt-image2 {
+    width: 115px;
+    height: 76px;
+  }
+  .add-alt-image1 > img {
+    width: 38px;
+    height: 38px;
+  }
+}
+@media (max-width: 576px) {
+  .add-vehicle-button > select,
+  .add-vehicle-button > button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    height: 4rem;
+  }
+}
+/******* ========== FOOTER ========== *******/
+footer {
+  background-color: #f9f9fb;
+  padding: 2rem 6%;
+}
+.footer-column {
+  padding-left: 5%;
+  flex: 1;
+}
+.footer-column-2 {
+  flex: 1;
+}
+.footer-column > p {
+  margin-bottom: 8px;
+}
+.footer-line {
+  border: solid 0.5px #c4c4c4;
+  margin: 20px 0px;
+}
+
+/******* ========== QUERY ========== *******/
+
+@media only screen and (max-width: 1200px) {
+  .shadow-container {
+    padding: 20px;
+  }
+  .forgot-password-background {
+    background-size: cover;
+  }
+  .edit-profile-button > div > a > button {
+    width: 250px;
+    height: 72px;
+    font-size: 24px;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+  .reserve-pic-container {
+    margin: auto;
+  }
+  .reserve-detail {
+    text-align: center;
+    padding: 50px 0;
+  }
+  .reserve-pic {
+    width: 522px;
+    height: 462px;
+    background-position: 45% 75%;
+  }
+  .product-reserve {
+    margin: 0;
+    align-self: center;
+    text-align: center;
+  }
+  .login-background {
+    background-size: cover;
+  }
+  .payment-row-3 {
+    flex-direction: column;
+  }
+  .payment-row-1 > div,
+  .payment-row-2 > div {
+    margin: 1rem;
+    padding: 2vh 5%;
+  }
+  .chat-item {
+    flex-direction: column;
+    width: 50%;
+  }
+  .history-main {
+    flex-direction: column;
+  }
+  .new-arrival {
+    margin: 0%;
+  }
+  .new-arrival-items {
+    justify-content: center;
+    flex-direction: row !important;
+  }
+  .more-detail-big-pic {
+    width: 35vw;
+    height: 35vw;
+  }
+  .more-detail-small-pic {
+    width: 117px;
+    height: 79px;
+    margin: 0 0.5rem !important;
+  }
+  .footer-flex {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .footer-flex > div {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .footer-column {
+    padding: 0px;
+  }
+  .footer-column-margin {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+  }
+  .add-image-container {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .btn-login,
+  .btn-register {
+    width: 20vh;
+    margin: 8px 0;
+  }
+  .mail-icon > a > img,
+  .profile-icon {
+    margin: 0.5rem 0;
+  }
+  .container-testimonials {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-background {
+    background-size: cover;
+  }
+  .sign-up,
+  .login-field {
+    text-align: center;
+  }
+  .sign-up-btn-custom {
+    margin-bottom: 5rem;
+  }
+  .shadow-container {
+    padding: 10px;
+  }
+  .forgot-password-background {
+    background-size: cover;
+  }
+  .edit-profile-button {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .edit-profile-button > div {
+    width: 100%;
+    text-align: center;
+  }
+  .edit-profile-button > div > a > button {
+    width: 100%;
+  }
+  .payment-row-1,
+  .payment-row-2 {
+    flex-direction: column;
+  }
+  button.chat-admin,
+  button.reserve-from-detail,
+  button.like-btn {
+    margin: 1rem 0;
+  }
+  a.chat-admin,
+  a.reserve-from-detail,
+  a.like-btn {
+    padding: 0 !important;
+  }
+  div.mail-dropdown > .dropdown-menu[data-bs-popper] {
+    position: absolute;
+    left: -120px;
+    margin-top: 0;
+    padding: 0.5rem !important;
+  }
+  .dropdown-menu[data-bs-popper] > a {
+    padding: 5px !important;
+  }
+  .chat-item {
+    width: 65%;
+  }
+  .cam-icon {
+    width: 50px;
+  }
+  .add-image-container {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .width-dropdown {
+    width: 100%;
+    justify-items: center;
+  }
+  .home-container {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .item1,
+  .item2,
+  .item3,
+  .item4 {
+    width: 100%;
+  }
+  .btn-search-container {
+    margin-top: 5%;
+  }
+  .forgot-password-background {
+    background-size: cover;
+  }
+  .forgot-title {
+    font-size: 48px;
+  }
+  .email-forgot {
+    padding-top: 2rem;
+  }
+  .profile-container {
+    padding: 6%;
+  }
+  .gender {
+    flex-direction: column;
+  }
+  .identity-container {
+    flex-direction: column;
+  }
+  .identity-container > div {
+    width: 100%;
+  }
+  .profile-title {
+    text-align: center;
+  }
+  .reserve-pic {
+    width: 261px;
+    height: 231px;
+  }
+  .reserve-vehicle-name {
+    font-size: 2rem;
+  }
+  .reserve-vehicle-name > span {
+    font-size: 28px;
+  }
+  .reserve-amount {
+    justify-content: center !important;
+  }
+  .reserve-amount > div {
+    margin: 0 5%;
+  }
+  .reservation-title {
+    font-size: 24px;
+  }
+  .reservation-title > a > img {
+    width: 21px;
+    height: 35px;
+  }
+  main.reserve-container {
+    padding: 6% 6%;
+  }
+  .reserve-amount > button,
+  .reserve-amount > div {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  .rmv-btn,
+  .add-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  .reserve-date-title {
+    font-size: 20px;
+  }
+  input.reserve-date[type="date"],
+  .product-reserve > select {
+    width: 100%;
+    padding: 13px 10px;
+    margin: 0.5rem 0;
+    font-size: 18px;
+    color: #80918e;
+  }
+
+  .btn-pay {
+    width: 100%;
+    height: 60px;
+    font-size: 20px;
+  }
+  .payment-main > div.payment-row-1 > div,
+  .payment-main > div.payment-row-2 > div {
+    font-size: 18px;
+  }
+  .payment-code-title {
+    font-size: 1.5rem;
+  }
+  .payment-row-3 {
+    font-size: 1rem;
+  }
+  .finish-payment-btn {
+    height: 7vh;
+  }
+  .payment-code-container {
+    flex-direction: column;
+  }
+  .payment-code {
+    width: 95%;
+  }
+
+  .slide-image > button {
+    margin: 0 !important;
+  }
+  .small-arrow {
+    height: 16px;
+    width: 11px;
+  }
+  a.reserve-from-detail {
+    padding: 0;
+  }
+  .chat-item {
+    width: 75%;
+  }
+  .more-detail-big-pic {
+    width: 65vw;
+    height: 65vw;
+  }
+  .cam-container {
+    width: 115px;
+    height: 76px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .width-dropdown {
+    grid-template-areas:
+      "location"
+      "type"
+      "date";
+  }
+  .title-home {
+    font-size: 36px;
+    width: 100%;
+  }
+  .popular-title,
+  .testimonials-title {
+    font-size: 24px;
+  }
+  .subtitle-home {
+    padding-top: 3rem;
+    font-size: 18px;
+  }
+  .review {
+    padding: 35px 0;
+  }
+  .review-text {
+    width: 100%;
+    font-size: 18px;
+  }
+  .review-photo {
+    width: 192px;
+    height: 245.5px;
+  }
+  nav {
+    padding: 1vh 4% !important;
+  }
+  .login-background {
+    background-size: cover;
+  }
+  p.no-account {
+    margin: 32px 0 16px 0px;
+  }
+  .sign-up > div {
+    width: 100%;
+  }
+  .sign-up-btn-custom {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 2rem;
+    font-size: 18px;
+  }
+  .login-title {
+    font-size: 48px;
+  }
+  .login-field > form > input {
+    width: 100%;
+    height: 60px;
+    padding: 8px 10px;
+    margin-top: 34px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  ::placeholder {
+    font-size: 18px;
+  }
+  .btn-login-page {
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+  }
+  .btn-login-with-google {
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    margin: 2rem 0;
+  }
+  .send-link,
+  .email-forgot {
+    flex-direction: column;
+  }
+  .email-forgot > input {
+    width: 100% !important;
+  }
+  .profile-name {
+    font-size: 28px;
+  }
+  .profile-fields {
+    font-size: 18px;
+  }
+  .profile-fields-title {
+    font-weight: 900;
+    padding-top: 2rem;
+  }
+  .profile-fields-subtitle {
+    color: #9f9f9f;
+    padding-top: 1rem;
+    font-size: 18px;
+  }
+  .profile-fields > div > input[type="text"],
+  .identity-flex > input[type="text"],
+  .identity-flex > input[type="date"] {
+    padding: 1rem 0.5rem;
+    margin: 4px 0;
+  }
+  .edit-profile-button > div > a > button {
+    height: 3.5rem;
+    font-size: large;
+  }
+  .payment-code {
+    flex-direction: column;
+  }
+  .payment-copy {
+    margin: 1rem;
+  }
+  .chat-item {
+    width: 100%;
+  }
+  .chat-item-name {
+    font-size: 1.5rem;
+  }
+  .chats {
+    font-size: 1.25rem;
+  }
+  .chat-user,
+  .chat-renter {
+    padding: 1rem;
+  }
+  .history-item-row {
+    flex-direction: column;
+  }
+  .filter > select {
+    width: 65%;
+  }
+  .search-form > input {
+    padding: 0.5rem;
+  }
+  .more-detail-big-pic {
+    width: 75vw;
+    height: 75vw;
+  }
+  img.payment-pic {
+    height: 55vw;
+  }
+  .finish-payment-btn {
+    font-size: 18px;
+  }
+  .pay-before {
+    font-size: 1.25rem;
+  }
+}
