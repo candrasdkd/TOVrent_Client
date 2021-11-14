@@ -12,6 +12,7 @@ import Vehicles from "./Vehicles";
 import Search from "./Search";
 import VehicleDetail from "./VehicleDetail";
 import Payment from "./Payment";
+import CheckCode from "./CheckCode";
 import ChangePassword from "./ChangePassword";
 import TransactionHistory from "./TransactionHistory";
 import ChatDetail from "./ChatDetail";
@@ -38,6 +39,9 @@ class AppWithRouter extends Component {
             </Route>
             <Route path="/view-more">
               <ViewMore />
+            </Route>
+            <Route path="/check-code">
+              <CheckCode />
             </Route>
             <Route path="/change-password">
               <ChangePassword />

@@ -12,49 +12,40 @@ const Login = (props) => {
   const [showMessage, setShowMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  let timer;
   const onSubmit = () => {
     if (email.length < 1) {
       setShowMessage(true);
-      setErrorMessage("Email is Required");
+      return setErrorMessage("Email is required");
     }
     if (!email.includes("@")) {
       setShowMessage(true);
-      setErrorMessage("Please input a Valid Email");
+      return setErrorMessage("Please input a valid email");
     }
     if (password.length < 1) {
       setShowMessage(true);
-      setErrorMessage("Password is Required");
+      return setErrorMessage("Password is required");
     }
     if (password.length < 6) {
       setShowMessage(true);
-      setErrorMessage("Password must have 6 or more characters!");
-    } else {
-      const form = new URLSearchParams();
-      form.append("email", email);
-      form.append("password", password);
-      props.postLogin(form);
-      // console.log(errorLogin);
+      return setErrorMessage("Password must have 6 or more characters!");
     }
+    const form = new URLSearchParams();
+    form.append("email", email);
+    form.append("password", password);
+    props.postLogin(form);
   };
-  const handleClick = () => {
-    onSubmit();
-    setIsDisabled(true);
-    timer = setTimeout(() => {
-      setIsDisabled(false);
-    }, 1500);
-  };
+
   useEffect(() => {
     const errorLogin = String(props.auth.error);
-    if (props.auth.isLogin) {
-      props.history.push("/");
+    if (props.auth.token !== "") {
+      setIsDisabled(true);
+      return props.history.push("/");
     }
-    if (errorLogin.includes("401")) {
+    if (errorLogin.includes("404")) {
       setShowMessage(true);
-      setErrorMessage("Username or Password Are Incorrect");
+      return setErrorMessage("Email or password are Incorrect");
     }
-    return () => clearTimeout(timer);
-  }, [props.auth.error, props.auth.isLogin, props.history, timer]);
+  }, [props.auth.error, props.auth.token, props.history]);
   return (
     <>
       <main className="login-background">
@@ -112,7 +103,7 @@ const Login = (props) => {
             <div>
               <button
                 className="btn-login-page"
-                onClick={handleClick}
+                onClick={onSubmit}
                 disabled={isDisabled}
               >
                 {isDisabled === true ? (

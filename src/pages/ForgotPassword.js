@@ -1,37 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { getEmailUser } from "../utils/https/Profile";
+import {
+  forgotPasswordAction,
+  resetStateAction,
+} from "../redux/actionCreators/user";
 import Footer from "../components/Footer";
-import CheckCode from "./CheckCode";
+import { connect } from "react-redux";
 
 function ForgotPassword(props) {
-  // const stateAuth = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  const [change, setChange] = useState(false);
   const [email, setEmail] = useState("");
-  // const [showMessage, setShowMessage] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
-  const sendEmail = () => {
-    // if (email.length < 1) {
-    //   setShowMessage(true);
-    //   setErrorMessage("Email is Required");
-    // } else if (!email.includes("@")) {
-    //   setShowMessage(true);
-    //   setErrorMessage("Please input a Valid Email");
-    // } else {
+  const [showMessage, setShowMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const onSubmit = () => {
+    if (email.length < 1) {
+      setShowMessage(true);
+      return setErrorMessage("Email is required");
+    }
+    if (!email.includes("@")) {
+      setShowMessage(true);
+      return setErrorMessage("Please input a valid Email");
+    }
     const form = new URLSearchParams();
     form.append("email", email);
-    getEmailUser(form);
+    props.sendEmail(form);
   };
 
-  const onSubmit = () => {
-    sendEmail();
-    setChange(true);
+  const submitHandler = () => {
+    onSubmit();
+    setIsDisabled(true);
   };
 
-  // const checkCode = () => {
-
-  // };
+  useEffect(() => {
+    if (props.user.isFulfilled === true) {
+      props.resetState();
+      return props.history.push("/check-code");
+    }
+    if (props.user.status === 404) {
+      setShowMessage(true);
+      return setErrorMessage("Email not found");
+    }
+    if (showMessage === true) {
+      return setIsDisabled(false);
+    }
+  }, [props, showMessage]);
   return (
     <>
       <main className="forgot-password-background">
@@ -42,30 +54,29 @@ function ForgotPassword(props) {
           <div className="main-content text-center">
             <div className="forgot-title">Don’t worry, we got your back!</div>
           </div>
+          {showMessage && (
+            <div className="error my-3 p-2 rounded fw-bold fs-5 text-center text-danger">
+              {errorMessage}
+            </div>
+          )}
           <div className="d-flex justify-content-center email-forgot">
-            {change ? (
-              <CheckCode />
-            ) : (
-              <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Enter your email adress"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            )}
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Enter your email adress"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </div>
           <div className="d-flex justify-content-center send-link">
-            {change ? (
-              <Link to="/change-password">
-                <button className="btn-login-page mt-5" onClick={onSubmit}>
-                  Confirm
-                </button>
-              </Link>
+            {isDisabled ? (
+              <button className="btn-login-page mt-5" disabled>
+                Send Link
+              </button>
             ) : (
-              <button className="btn-login-page mt-5" onClick={onSubmit}>
+              <button className="btn-login-page mt-5" onClick={submitHandler}>
                 Send Link
               </button>
             )}
@@ -86,4 +97,22 @@ function ForgotPassword(props) {
   );
 }
 
-export default withRouter(ForgotPassword);
+const mapStateToProps = ({ user }) => {
+  return {
+    user,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendEmail: (body) => {
+      dispatch(forgotPasswordAction(body));
+    },
+    resetState: () => {
+      dispatch(resetStateAction());
+    },
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ForgotPassword));

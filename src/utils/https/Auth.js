@@ -9,6 +9,6 @@ export const postRegister = (body) => {
   return axios.post(`${url}/auth/register`, body);
 };
 
-export const deleteLogout = (token) => {
-  return axios.delete(`${url}/auth/logout`, { token: token });
+export const deleteLogout = (body) => {
+  return axios.delete(`${url}/auth/logout`, body);
 };

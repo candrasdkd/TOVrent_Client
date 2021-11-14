@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import googleIcon from "../assets/img/icon/google-icon.png";
 import Spinner from "react-bootstrap/Spinner";
@@ -13,55 +13,48 @@ function Register() {
   const [showMessage, setShowMessage] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isDisabled, setIsDisabled] = React.useState(false);
-  let timer;
   const onSubmit = () => {
     if (username.length < 1) {
       setShowMessage(true);
-      setErrorMessage("Username is Required");
-    } else if (email.length < 1) {
-      setShowMessage(true);
-      setErrorMessage("Email is Required");
-    } else if (!email.includes("@")) {
-      setShowMessage(true);
-      setErrorMessage("Please input a Valid Email");
-    } else if (password.length < 1) {
-      setShowMessage(true);
-      setErrorMessage("Password is Required");
-    } else if (password.length < 6) {
-      setShowMessage(true);
-      setErrorMessage("Password must have 6 or more characters!");
-    } else {
-      const form = new URLSearchParams();
-      form.append("username", username);
-      form.append("email", email);
-      form.append("password", password);
-      form.append("role_id", 3);
-      postRegister(form)
-        .then((data) => {
-          console.log(data);
-          timer = setTimeout(() => {
-            history.push("/login");
-          }, 1000);
-        })
-        .catch((error) => {
-          console.log(error);
-          setShowMessage(true);
-          setErrorMessage("Invalid Email or Password");
-        });
+      return setErrorMessage("Username is required");
     }
+    if (email.length < 1) {
+      setShowMessage(true);
+      return setErrorMessage("Email is required");
+    }
+    if (!email.includes("@")) {
+      setShowMessage(true);
+      return setErrorMessage("Please input a valid email");
+    }
+    if (password.length < 1) {
+      setShowMessage(true);
+      return setErrorMessage("Password is required");
+    }
+    if (password.length < 6) {
+      setShowMessage(true);
+      return setErrorMessage("Password must have 6 or more characters!");
+    }
+    const form = new URLSearchParams();
+    form.append("username", username);
+    form.append("email", email);
+    form.append("password", password);
+    form.append("role_id", 3);
+    postRegister(form)
+      .then((data) => {
+        if (data.data.status === 201) {
+          setIsDisabled(true);
+          return history.push("/login");
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          setShowMessage(true);
+          return setErrorMessage("Email has registered");
+        }
+      });
   };
 
-  const handleClick = () => {
-    onSubmit();
-    setIsDisabled(true);
-    timer = setTimeout(() => {
-      setIsDisabled(false);
-    }, 1000);
-  };
 
-  useEffect(() => {
-    return () => clearTimeout(timer);
-  }, [timer]);
 
   return (
     <>
@@ -112,7 +105,7 @@ function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
-              <p></p>
+              <br></br>
               <input
                 type="password"
                 id="pass"
@@ -127,7 +120,7 @@ function Register() {
             <div>
               <button
                 className="btn-login-page"
-                onClick={handleClick}
+                onClick={onSubmit}
                 disabled={isDisabled}
               >
                 {isDisabled === true ? (

@@ -17,3 +17,11 @@ export const getUserById = (params, token) => {
 export const getEmailUser = (body) => {
   return axios.post(`${url}/users/forgot_password`, body);
 };
+
+export const getCode = (body) => {
+  return axios.post(`${url}/users/forgot_password/check-code`, body);
+};
+
+export const changePass = (body) => {
+  return axios.patch(`${url}/users/forgot_password/change-password`, body);
+};

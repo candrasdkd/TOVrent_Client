@@ -443,14 +443,13 @@ a.text-view {
   background-image: url(/src/assets/img/popular3.jpg);
   background-size: cover;
   background-position: center;
-  /* background-repeat: no-repeat; */
-  /* height: 100vh; */
+;
 }
 .shadow-container {
   background: rgba(0, 0, 0, 0.4);
   height: 100%;
   width: 100%;
-  padding: 107px 10%;
+  padding: 50px 6%;
 }
 .padding-register {
   padding: 50px 6%;
@@ -495,7 +494,8 @@ button.chat-admin:hover {
   margin: 0px 3rem;
 }
 .login-field > form > input,
-.email-forgot > input[type="text"] {
+.email-forgot > input[type="text"],
+.check-code > input[type="text"] {
   background: rgba(255, 255, 255, 0.26);
   width: 447px;
   height: 79px;
@@ -509,7 +509,8 @@ button.chat-admin:hover {
   font-size: 24px;
 }
 .login-field > form > input::placeholder,
-.email-forgot > input[type="text"]::placeholder {
+.email-forgot > input[type="text"]::placeholder,
+.check-code > input[type="text"]::placeholder {
   color: white;
   font-weight: 700;
   font-size: 24px;
@@ -519,8 +520,12 @@ button.chat-admin:hover {
 }
 .forgot-password > a {
   font-size: 18px;
-  color: white !important;
+  color: white;
   font-family: Mulish, sans-serif;
+  text-decoration-line: underline;
+}
+.forgot-password > a:hover {
+  color: #ffcd61;
 }
 .btn-login-page {
   background-color: #ffcd61;
@@ -580,11 +585,16 @@ button.chat-admin:hover {
   font-size: 64px;
   padding-top: 40px;
 }
-.email-forgot {
+.email-forgot,
+.check-code {
   padding-top: 83px;
   font-size: 24px;
 }
-.email-forgot > input[type="text"] {
+.check-code {
+  justify-content: center;
+}
+.email-forgot > input[type="text"],
+.check-code > input[type="text"] {
   text-align: center;
   border: none;
 }

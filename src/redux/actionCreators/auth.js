@@ -1,6 +1,6 @@
-import { LOGIN, FORGOT_PASSWORD, LOGOUT, EDIT_PROFILE} from "./actionString";
+import { LOGIN, LOGOUT, EDIT_PROFILE } from "./actionString";
 import { deleteLogout, postLogin } from "../../utils/https/Auth";
-import { patchProfile, getEmailUser } from "../../utils/https/Profile";
+import { patchProfile } from "../../utils/https/User";
 export const loginAction = (body) => {
   return {
     type: LOGIN,
@@ -14,17 +14,11 @@ export const profileAction = (body, params, token) => {
     payload: patchProfile(body, params, token),
   };
 };
-export const logoutAction = (token) => {
+export const logoutAction = (body) => {
   return {
     type: LOGOUT,
-    payload: deleteLogout(token),
+    payload: deleteLogout(body),
   };
 };
 
-export const ForgotPasswordAction = (body) => {
-  return {
-    type: FORGOT_PASSWORD,
-    payload: getEmailUser(body),
-  };
-};
 

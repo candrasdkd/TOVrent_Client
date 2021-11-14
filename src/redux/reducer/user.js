@@ -1,92 +1,94 @@
 import {
-  LOGIN,
-  LOGOUT,
-  EDIT_PROFILE,
+  FORGOT_PASSWORD,
+  CHECK_CODE,
+  RESET_STATE,
+  CHANGE_PASSWORD,
 } from "../actionCreators/actionString";
 import { ActionType } from "redux-promise-middleware";
 
 const defaultState = {
-  authInfo: {},
-  token: "",
   isPending: false,
   isFulfilled: false,
   isRejected: false,
-  isLogin: false,
-  error: "",
+  data: [],
+  status: "",
 };
 
 const authReducer = (prevstate = defaultState, action) => {
   const { Pending, Fulfilled, Rejected } = ActionType;
   switch (action.type) {
-    case LOGIN.concat("_", Pending):
+    case FORGOT_PASSWORD.concat("_", Pending):
       return {
         ...prevstate,
         isPending: true,
         isFulfilled: false,
         isRejected: false,
       };
-    case LOGIN.concat("_", Rejected):
+    case FORGOT_PASSWORD.concat("_", Rejected):
       return {
         ...prevstate,
         isPending: false,
         isRejected: true,
-        isLogin: false,
         error: action.payload,
+        status: action.payload.response.status,
       };
-    case LOGIN.concat("_", Fulfilled):
+    case FORGOT_PASSWORD.concat("_", Fulfilled):
       return {
         ...prevstate,
-        isPending: false,
         isFulfilled: true,
-        token: action.payload.data.result.token,
-        authInfo: action.payload.data.result.userInfo,
-        isLogin: true,
-        error: "",
+        isPending: false,
+        data: action.payload.data,
       };
-    case LOGOUT.concat("_", Pending):
+    case CHECK_CODE.concat("_", Pending):
       return {
         ...prevstate,
         isPending: true,
         isFulfilled: false,
         isRejected: false,
       };
-    case LOGOUT.concat("_", Rejected):
+    case CHECK_CODE.concat("_", Rejected):
       return {
         ...prevstate,
         isPending: false,
         isRejected: true,
         error: action.payload,
+        status: action.payload.response.status,
       };
-    case LOGOUT.concat("_", Fulfilled):
+    case CHECK_CODE.concat("_", Fulfilled):
       return {
         ...prevstate,
-        isPending: false,
         isFulfilled: true,
-        authInfo: action.payload.data.result,
-        token: "",
-        isLogin: false,
+        isPending: false,
+        data: action.payload.data,
       };
-    case EDIT_PROFILE.concat("_", Pending):
+    case CHANGE_PASSWORD.concat("_", Pending):
       return {
         ...prevstate,
         isPending: true,
         isFulfilled: false,
         isRejected: false,
       };
-    case EDIT_PROFILE.concat("_", Rejected):
+    case CHANGE_PASSWORD.concat("_", Rejected):
       return {
         ...prevstate,
         isPending: false,
         isRejected: true,
         error: action.payload,
+        status: action.payload.response.status,
       };
-    case EDIT_PROFILE.concat("_", Fulfilled):
+    case CHANGE_PASSWORD.concat("_", Fulfilled):
       return {
         ...prevstate,
         isFulfilled: true,
         isPending: false,
-        error: "",
-        authInfo: action.payload.data.result,
+        data: [],
+      };
+    case RESET_STATE:
+      return {
+        ...prevstate,
+        isPending: false,
+        isFulfilled: false,
+        isRejected: false,
       };
     default:
       return prevstate;

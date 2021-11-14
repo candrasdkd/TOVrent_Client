@@ -1,9 +1,11 @@
 export const LOGIN = "LOGIN";
-export const REGISTER = "REGISTER";
 export const LOGOUT = "LOGOUT";
-export const COUNT_UP= "COUNT_UP";
+export const COUNT_UP = "COUNT_UP";
 export const COUNT_DOWN = "COUNT_DOWN";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const UPLOAD_VEHICLE = "UPLOAD_VEHICLE";
 export const EDIT_VEHICLE = "EDIT_VEHICLE";
-export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const CHECK_CODE = "CHECK_CODE";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+export const RESET_STATE = "RESET_STATE";
