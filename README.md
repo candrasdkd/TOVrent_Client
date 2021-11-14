@@ -1,4 +1,4 @@
-# **TOVrent - BACKEND**
+# **TOVrent - FRONTEND**
 <p align="center">
   <img src="public/images/icon/tov.png" />
 </p>
