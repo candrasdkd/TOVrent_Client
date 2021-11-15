@@ -3,6 +3,7 @@ import {
   CHECK_CODE,
   RESET_STATE,
   CHANGE_PASSWORD,
+  UPDATE_PASSWORD,
 } from "../actionCreators/actionString";
 import { ActionType } from "redux-promise-middleware";
 
@@ -83,12 +84,34 @@ const authReducer = (prevstate = defaultState, action) => {
         isPending: false,
         data: [],
       };
+    case UPDATE_PASSWORD.concat("_", Pending):
+      return {
+        ...prevstate,
+        isPending: true,
+        isFulfilled: false,
+        isRejected: false,
+      };
+    case UPDATE_PASSWORD.concat("_", Rejected):
+      return {
+        ...prevstate,
+        isPending: false,
+        isRejected: true,
+        error: action.payload,
+        status: action.payload.response.status,
+      };
+    case UPDATE_PASSWORD.concat("_", Fulfilled):
+      return {
+        ...prevstate,
+        isFulfilled: true,
+        isPending: false,
+      };
     case RESET_STATE:
       return {
         ...prevstate,
         isPending: false,
         isFulfilled: false,
         isRejected: false,
+        status: "",
       };
     default:
       return prevstate;

@@ -443,7 +443,6 @@ a.text-view {
   background-image: url(/src/assets/img/popular3.jpg);
   background-size: cover;
   background-position: center;
-;
 }
 .shadow-container {
   background: rgba(0, 0, 0, 0.4);
@@ -647,8 +646,8 @@ a:active.resend-link-url {
   background-image: url(/src/assets/img/icon/pen.png);
   background-position: center;
   background-size: contain;
-  width: 40%;
-  height: 40%;
+  width: 50%;
+  height: 100%;
   background-repeat: no-repeat;
   cursor: pointer;
   border: none;
@@ -720,14 +719,83 @@ p.profile-desc {
 }
 /* Style the indicator (dot/circle) */
 .gender-container .checkmark:after {
-  top: 5px;
-  left: 5px;
-  width: 20px;
-  height: 20px;
+  top: 7px;
+  left: 7px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #ffcd61;
 }
+.modal-title {
+  font-weight: 800;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 4%;
+  height: 50vh;
+}
+.old-password > h5,
+.new-password > h5,
+.error-password > h5{
+  color: #393939;
+  font-size: 24px;
+}
 
+.old-password > input::placeholder,
+.new-password > input::placeholder,
+.error-password > input::placeholder {
+  color: #9f9f9f;
+  font-size: 22px;
+}
+.old-password > input[type="password"],
+.new-password > input[type="password"] {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  /* box-sizing: border-box; */
+  border: none;
+  border-bottom: 2px solid black;
+}
+.error-password > input[type="password"] {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  /* box-sizing: border-box; */
+  border: 2px solid red;
+}
+.old-password > input[type="password"]:focus-visible,
+.new-password > input[type="password"]:focus-visible,
+.error-password > input[type="password"]:focus-visible {
+  outline: 1px solid black;
+  border-radius: 5px;
+  border: none;
+  border-bottom: none;
+}
+.modal-footer {
+  padding: 2% 5%;
+}
+.close-modal {
+  color: #fff;
+  background-color: #ea5455;
+  border-color: #ff5c5c;
+  box-shadow: 0px 3px 10px 0 rgba(236, 71, 71, 0.75);
+}
+.submit-modal {
+  color: #fff;
+  background-color: rgb(25, 135, 84);
+  border-color: rgb(25, 135, 84);
+  box-shadow: 0px 3px 10px 0 rgba(25, 135, 84, 0.6);
+}
+.close-modal:hover {
+  background-color: #eb3941;
+  box-shadow: 0 5px 15px rgba(212, 82, 87, 0.4);
+}
+.submit-modal:hover {
+  background-color: #0ba360;
+  box-shadow: 0 5px 15px rgba(212, 82, 87, 0.4);
+}
 .profile-fields {
   font-size: 24px;
 }
@@ -756,6 +824,12 @@ p.profile-desc {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.input-name {
+  margin-right: 2%;
+}
+.input-date {
+  margin-left: 2%;
 }
 .edit-profile-button > div > a > button {
   width: 322px;
@@ -1735,23 +1809,70 @@ footer {
   .forgot-title {
     font-size: 48px;
   }
+  nav {
+    padding: 1% 4% 1% 1% !important;
+  }
   .email-forgot {
     padding-top: 2rem;
   }
-  .profile-container {
-    padding: 6%;
+  .input-name {
+    margin-right: 0%;
   }
-  .gender {
-    flex-direction: column;
+  .input-date {
+    margin-left: 0%;
+  }
+  .profile-container {
+    padding: 4%;
+  }
+  .profile-title {
+    font-size: 34px;
+  }
+  .profile-display-container {
+    height: 170px;
+  }
+  .profile-display {
+    height: 170px;
+    width: 170px;
+  }
+  .edit-profile {
+    width: 40px;
+    height: 40px;
+    top: 110px;
+    right: 55px;
+  }
+  .edit-icon {
+    width: 100%;
+    height: 100%;
+  }
+  .profile-name {
+    font-size: 38px;
+  }
+  .gender-container {
+    margin: 0 50px 12px 50px;
+    font-size: 24px;
+    padding-left: 30px;
+  }
+  .checkmark {
+    height: 25px;
+    width: 25px;
+    top: 5px;
+    left: 5px;
+  }
+  .gender-container .checkmark:after {
+    top: 5.5px;
+    left: 5.5px;
+    width: 13px;
+    height: 13px;
+  }
+  .profile-fields-title {
+    padding-top: 3rem;
   }
   .identity-container {
     flex-direction: column;
   }
+
   .identity-container > div {
     width: 100%;
-  }
-  .profile-title {
-    text-align: center;
   }
   .reserve-pic {
     width: 261px;
@@ -1851,11 +1972,8 @@ footer {
 }
 
 @media only screen and (max-width: 576px) {
-  .width-dropdown {
-    grid-template-areas:
-      "location"
-      "type"
-      "date";
+  nav {
+    padding: 1% 4% 1% 1% !important;
   }
   .title-home {
     font-size: 36px;
@@ -1932,8 +2050,31 @@ footer {
   .email-forgot > input {
     width: 100% !important;
   }
+  .input-name {
+    margin-right: 0%;
+  }
+  .input-date {
+    margin-left: 0%;
+  }
+  .profile-title {
+    font-weight: 700;
+    font-size: 30px;
+  }
+  .edit-profile {
+    width: 30px;
+    height: 30px;
+    top: 80px;
+    right: 80px;
+  }
+  .edit-icon {
+    width: 100%;
+    height: 100%;
+  }
   .profile-name {
-    font-size: 28px;
+    font-size: 25px;
+  }
+  p.profile-desc {
+    margin-bottom: 2rem;
   }
   .profile-fields {
     font-size: 18px;
@@ -1956,6 +2097,31 @@ footer {
   .edit-profile-button > div > a > button {
     height: 3.5rem;
     font-size: large;
+  }
+  .profile-display-container {
+    height: 120px;
+  }
+  .profile-display {
+    height: 120px;
+    width: 120px;
+  }
+  .gender-container {
+    margin: 0 30px 12px 30px;
+    font-size: 20px;
+    padding-left: 30px;
+  }
+  .checkmark {
+    height: 20px;
+    width: 20px;
+    top: 5px;
+    left: 5px;
+  }
+  .gender-container .checkmark:after {
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
   }
   .payment-code {
     flex-direction: column;

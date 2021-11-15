@@ -3,8 +3,21 @@ import {
   CHECK_CODE,
   RESET_STATE,
   CHANGE_PASSWORD,
+  UPDATE_PASSWORD,
 } from "./actionString";
-import { getEmailUser, getCode, changePass } from "../../utils/https/User";
+import {
+  getEmailUser,
+  getCode,
+  changePass,
+  updatePasswordUser,
+} from "../../utils/https/User";
+
+export const updatePasswordAction = (params, body, token) => {
+  return {
+    type: UPDATE_PASSWORD,
+    payload: updatePasswordUser(params, body, token),
+  };
+};
 
 export const forgotPasswordAction = (body) => {
   return {

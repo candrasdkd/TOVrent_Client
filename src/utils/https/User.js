@@ -14,6 +14,12 @@ export const getUserById = (params, token) => {
   });
 };
 
+export const updatePasswordUser = (params, body, token) => {
+  return axios.patch(`${url}/users/password/${params}`, body, {
+    headers: { "x-access-token": `Bearer ${token}` },
+  });
+};
+
 export const getEmailUser = (body) => {
   return axios.post(`${url}/users/forgot_password`, body);
 };

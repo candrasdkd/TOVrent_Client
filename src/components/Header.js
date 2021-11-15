@@ -207,6 +207,7 @@ class Header extends Component {
                             confirmButtonColor: "#d33",
                             cancelButtonColor: "#00000",
                             confirmButtonText: "Yes",
+                            reverseButtons:true,
                           }).then((result) => {
                             if (result.isConfirmed) {
                               this.signOutHandler();

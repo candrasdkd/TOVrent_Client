@@ -5,6 +5,7 @@ export const COUNT_DOWN = "COUNT_DOWN";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const UPLOAD_VEHICLE = "UPLOAD_VEHICLE";
 export const EDIT_VEHICLE = "EDIT_VEHICLE";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const CHECK_CODE = "CHECK_CODE";
 export const CHANGE_PASSWORD = "CHANGE_PASSWORD";

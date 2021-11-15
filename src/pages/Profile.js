@@ -2,10 +2,12 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { profileAction } from "../redux/actionCreators/auth";
+import { updatePasswordAction } from "../redux/actionCreators/user";
 import Swal from "sweetalert2";
 import defaultImage from "../assets/img/default-pp.png";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import EditPassword from "../components/ModalEditPass";
 const url = process.env.REACT_APP_BASE_URL;
 
 class Profile extends React.Component {
@@ -21,6 +23,7 @@ class Profile extends React.Component {
     profilePic: this.props.auth.authInfo.userImage
       ? url + this.props.auth.authInfo?.userImage
       : defaultImage,
+    modalShow: false,
   };
   constructor(props) {
     super(props);
@@ -69,6 +72,7 @@ class Profile extends React.Component {
       denyButtonText: `Don't save`,
       confirmButtonText: "Save",
       icon: "question",
+      reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
         this.props.updateProfile(
@@ -76,21 +80,22 @@ class Profile extends React.Component {
           this.props.auth.authInfo.userId,
           this.props.auth.token
         );
-        Swal.fire("Saved!", "", "success");
-        setTimeout(() => {
-          this.props.history.push("/");
-        }, 1000);
+        Swal.fire({
+          icon: "success",
+          title: "Update profile success",
+          position: "top-start",
+          timer: 2000,
+          toast: true,
+          showConfirmButton: false,
+        });
+        this.props.history.push("/");
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
   };
-  // componentDidUpdate() {
-  //   this.updateProfileHandler();
-  // }
 
   render() {
-    console.log(this.state.files || this.props.auth.authInfo.userImage);
     return (
       <>
         <Header />
@@ -203,27 +208,29 @@ class Profile extends React.Component {
             <div className="Identity">
               <p className="profile-fields-title">Identity</p>
               <div className="identity-container">
-                <div className="flex-grow-1 identity-flex me-md-5">
+                <div className="input-name flex-grow-1 identity-flex">
                   <label className="profile-fields-subtitle" htmlFor="dname">
                     Display name:
                   </label>
                   <input
                     type="text"
-                    id="dname"
                     name="dname"
+                    className=""
                     defaultValue={this.props.auth.authInfo.userFullName}
                     onChange={(e) =>
                       this.setState({ userName: e.target.value })
                     }
                   />
                 </div>
-                <div className="flex-grow-1 identity-flex ms-md-5">
-                  <label className="profile-fields-subtitle" htmlFor="MM/DD/YY">
+                <div className="flex-grow-1 identity-flex">
+                  <label
+                    className="input-date profile-fields-subtitle"
+                    htmlFor="MM/DD/YY"
+                  >
                     MM/DD/YY
                   </label>
                   <input
                     type="date"
-                    // id="DD/MM/YY"
                     name="MM/DD/YY"
                     defaultValue={new Date(
                       this.props.auth.authInfo.userDOB
@@ -248,7 +255,18 @@ class Profile extends React.Component {
               </div>
               <div>
                 <Link to="#">
-                  <button className="btn-edit-pass">Edit Password</button>
+                  <button
+                    className="btn-edit-pass"
+                    onClick={() => this.setState({ modalShow: true })}
+                  >
+                    Edit Password
+                  </button>
+                  <EditPassword
+                    show={this.state.modalShow}
+                    close={() => this.setState({ modalShow: false })}
+                    id={this.props.auth.authInfo.userId}
+                    token={this.props.auth.token}
+                  />
                 </Link>
               </div>
               <div>
@@ -274,6 +292,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateProfile: (body, params, token) => {
       dispatch(profileAction(body, params, token));
+    },
+    updatePassword: (params, body, token) => {
+      dispatch(updatePasswordAction(params, body, token));
     },
   };
 };
