@@ -8,8 +8,8 @@ function Card({ link, picture, title, subtitle }) {
       style={{ backgroundImage: `url(${picture})`, backgroundColor: "grey" }}
     >
       <div className="name-card-text">
-        <div className="fw-bolder">{title}</div>
-        {subtitle}
+        <div className="card-title fw-bolder">{title}</div>
+        <div className="card-subtitle">{subtitle}</div>
       </div>
     </Link>
   );

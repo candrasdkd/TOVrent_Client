@@ -12,9 +12,9 @@ import Loader from "react-loader-spinner";
 class Home extends Component {
   state = {
     popular: [],
-    keywoard: [],
-    location: [],
-    type: [],
+    keyword: "",
+    location: "",
+    type: "",
   };
 
   componentDidMount() {
@@ -29,9 +29,17 @@ class Home extends Component {
   }
 
   searchHandler() {
-    this.props.history.push(
-      `/search?keyword=${this.state.keywoard}&location=${this.state.location}&type_id=${this.state.type}&limit=15`
-    );
+    let query = "/search?";
+    if (this.state.keyword) {
+      query += `keyword=${this.state.keyword}&`;
+    }
+    if (this.state.location) {
+      query += `location=${this.state.location}&`;
+    }
+    if (this.state.type) {
+      query += `type_id=${this.state.type}&`;
+    }
+    this.props.history.push(`${query.slice(0, -1)}`);
   }
 
   render() {
@@ -59,7 +67,7 @@ class Home extends Component {
                   type="text"
                   className="item1 search-home"
                   placeholder="Search vehicle (ex. Honda)"
-                  onChange={(e) => this.setState({ keywoard: e.target.value })}
+                  onChange={(e) => this.setState({ keyword: e.target.value })}
                 />
                 <select
                   defaultValue="Location"

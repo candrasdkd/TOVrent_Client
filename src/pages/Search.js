@@ -13,13 +13,14 @@ class Search extends Component {
     super(props);
     this.state = {
       search: [],
-      keywoard: [],
-      location: [],
-      type: [],
+      keyword: "",
+      location: "",
+      type: "",
     };
   }
+
   axiosGet = (query) => {
-    Axios.get(`${url}/vehicles${query}`)
+    Axios.get(`${url}/vehicles${query}&limit=15`)
       .then(({ data }) => {
         this.setState({
           search: data.result.data,
@@ -29,18 +30,42 @@ class Search extends Component {
         console.log(err);
       });
   };
-  searchVehicleHandler = (e) => {
-    // e.preventDefault();
-    const query = `?keyword=${this.state.keywoard}&location=${this.state.location}&type_id=${this.state.type}&limit=15`;
-    this.props.history.push(`/search${query}`);
+
+  searchVehicleHandler = () => {
+    let query = "?";
+    if (this.state.keyword) {
+      query += `keyword=${this.state.keyword}&`;
+    }
+    if (this.state.location) {
+      query += `location=${this.state.location}&`;
+    }
+    if (this.state.type) {
+      query += `type_id=${this.state.type}&`;
+    }
+    this.props.history.push(`${query.slice(0, -1)}`);
     this.axiosGet(query);
   };
+
   componentDidMount() {
     const querySearch = this.props.location.search;
-    // console.log(querySearch);
+    let params = new URLSearchParams(this.props.location.search.substring(1));
+    let keyword = params.get("keyword");
+    let location = params.get("location");
+    let type = params.get("type_id");
+    this.setState({
+      keyword: keyword,
+      location: location,
+      type: type,
+    });
+    console.log(querySearch);
     querySearch && this.axiosGet(querySearch);
   }
+
   render() {
+    let params = new URLSearchParams(this.props.location.search.substring(1));
+    let keyword = params.get("keyword");
+    let location = params.get("location");
+    let type = params.get("type_id");
     return (
       <>
         <Header />
@@ -54,16 +79,18 @@ class Search extends Component {
           >
             <input
               type="text"
+              defaultValue={keyword}
               className="search-form"
               placeholder="Search vehicle (ex. Honda)"
               onChange={(e) =>
                 this.setState({
-                  keywoard: e.target.value,
+                  keyword: e.target.value,
                 })
               }
             />
             <input
               type="text"
+              defaultValue={location}
               className="location-form"
               placeholder="Location (ex. Jakarta)"
               onChange={(e) =>
@@ -80,7 +107,7 @@ class Search extends Component {
               Search{" "}
             </button>
             <select
-              defaultValue="Type"
+              defaultValue={type ? type : "Type"}
               className="item3 bg-white"
               onChange={(e) => {
                 this.setState({ type: e.target.value });
@@ -93,7 +120,8 @@ class Search extends Component {
               <option value="2">Motorcycle</option>
               <option value="3">Bike</option>
             </select>
-            {this.props.location.search !== "?keyword=&location=&type_id=&limit=15" &&
+            {this.props.location.search !==
+              "?keyword=&location=&type_id=&limit=15" &&
             this.state.search.length > 0 ? (
               <>
                 <h2 className="popular-title mt-5 mb-5">Search Result :</h2>

@@ -19,26 +19,20 @@ class Vehicles extends Component {
       motorcycle: [],
       bike: [],
       isSearch: false,
-      keywoard: [],
-      location: [],
+      keyword: "",
+      location: "",
     };
   }
-  axiosGet = (query) => {
-    Axios.get(`${url}/vehicles${query}`)
-      .then(({ data }) => {
-        this.setState({
-          search: data.result.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   searchVehicleHandler = () => {
-    // e.preventDefault();
-    const query = `?keyword=${this.state.keywoard}&location=${this.state.location}&limit=15`;
-    this.props.history.push(`/search${query}`);
-    this.axiosGet(query);
+    let query = "/search?";
+    if (this.state.keyword) {
+      query += `keyword=${this.state.keyword}&`;
+    }
+    if (this.state.location) {
+      query += `location=${this.state.location}&`;
+    }
+    this.props.history.push(`${query.slice(0, -1)}`);
   };
   componentDidMount() {
     const getPerType = (filter) => {
@@ -79,7 +73,7 @@ class Vehicles extends Component {
     // console.log(this.state.dataVehicles)
   }
   render() {
-    console.log(this.state.motorcycle)
+    console.log(this.state.motorcycle);
     return (
       <>
         <Header />
@@ -97,7 +91,7 @@ class Vehicles extends Component {
               placeholder="Search vehicle (ex. Honda)"
               onChange={(e) =>
                 this.setState({
-                  keywoard: e.target.value,
+                  keyword: e.target.value,
                   isSearch: true,
                 })
               }
@@ -176,10 +170,7 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Cars</div>
-              <Link
-                to={`/view-more?type_id=1`}
-                className="text-view"
-              >
+              <Link to={`/view-more?type_id=1`} className="text-view">
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
@@ -207,10 +198,7 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Motorcycle</div>
-              <Link
-                to={`/view-more?type_id=2`}
-                className="text-view"
-              >
+              <Link to={`/view-more?type_id=2`} className="text-view">
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
@@ -237,10 +225,7 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Bike</div>
-              <Link
-                to={`/view-more?type_id=2`}
-                className="text-view"
-              >
+              <Link to={`/view-more?type_id=2`} className="text-view">
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
