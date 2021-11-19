@@ -43,9 +43,9 @@ export const changePasswordAction = (body) => {
 export const resetStateAction = () => {
   return {
     type: RESET_STATE,
-    payload: {
-      isFulfilled: false,
-      isPending: false,
-    },
+    // payload: {
+    //   isFulfilled: false,
+    //   isPending: false,
+    // },
   };
 };

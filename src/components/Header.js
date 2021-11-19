@@ -172,8 +172,8 @@ class Header extends Component {
                     className="profile-icon profile-photo"
                     style={{
                       backgroundImage: `url(${
-                        this.props.auth.authInfo.userImage
-                          ? url + this.props.auth.authInfo.userImage
+                        this.props.auth.authInfo.image
+                          ? url + this.props.auth.authInfo.image
                           : defaultImage
                       })`,
                     }}

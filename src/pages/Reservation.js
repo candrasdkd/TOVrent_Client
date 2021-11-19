@@ -17,14 +17,14 @@ class Reservation extends Component {
     reserveStartDate: "",
     id: "",
     image: "",
-    quantity: 0,
+    quantity: "",
     ownerId: "",
     city: "",
     name: "",
     address: "",
     price: "",
     capacity: "",
-    typeName: "",
+    category: "",
   };
 
   onMinusHandler = () => {
@@ -56,7 +56,7 @@ class Reservation extends Component {
     if (!this.state.reserveStartDate)
       return Swal.fire("Please Choose Rent Date!", "", "error");
     const reduxState = this.props.reduxState;
-    const token = reduxState.auth.token
+    const token = reduxState.auth.token;
     const propsVehicleId = this.props.match.params.id;
     const pickedDate = new Date(`${this.state.reserveStartDate}`);
     const finishedDate = new Date(
@@ -75,7 +75,7 @@ class Reservation extends Component {
 
     const body = {
       vehicle_id: propsVehicleId,
-      user_id: reduxState.auth.authInfo.userId,
+      user_id: reduxState.auth.authInfo.id,
       owner_id: this.state.ownerId,
       quantity: reduxState.count.number,
       price: reduxState.count.number * this.state.price,
@@ -85,12 +85,11 @@ class Reservation extends Component {
       days: this.state.duration,
       status_id: 1,
       location: this.state.city,
-      type: this.state.typeName
+      type: this.state.category,
     };
-
     postTransactions(body, token)
       .then((data) => {
-        this.props.history.push(`/payment/${data.data.result}`);
+        this.props.history.push(`/payment/${data.data.result[0].id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -103,28 +102,26 @@ class Reservation extends Component {
       .then(({ data }) => {
         const dataResult = data.result[0];
         this.setState({
-          id: dataResult.vehicleId,
-          quantity: dataResult.vehicleQuantity,
-          city: dataResult.vehicleCity,
-          name: dataResult.vehicleName,
-          image: dataResult.vehicleImage,
-          address: dataResult.vehicleAddress,
-          capacity: dataResult.vehicleCapacity,
-          price: dataResult.vehiclePrice,
-          typeName: dataResult.vehicleNameType,
-          ownerId: dataResult.vehicleOwnerId,
+          id: dataResult.id,
+          quantity: dataResult.quantity,
+          city: dataResult.city,
+          name: dataResult.name,
+          image: dataResult.image,
+          address: dataResult.address,
+          capacity: dataResult.capacity,
+          price: dataResult.price,
+          category: dataResult.type,
+          ownerId: dataResult.ownerId,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-   
   }
 
   render() {
     const pic = this.state.image;
     const { reduxState, countUp, countDown } = this.props;
-    console.log(this.state.typeName,this.state.city)
     return (
       <>
         <Header />
@@ -157,7 +154,7 @@ class Reservation extends Component {
                 <span>{this.state.city}</span>
               </p>
               <div className="my-5">
-                {this.state.quantity !== 0 ? (
+                {this.state.quantity > 0 ? (
                   <CounterButton
                     onClickRemove={countDown}
                     onClickAdd={countUp}

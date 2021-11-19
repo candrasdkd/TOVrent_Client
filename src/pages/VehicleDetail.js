@@ -7,11 +7,10 @@ import Spinner from "react-bootstrap/Spinner";
 import backIcon from "../assets/img/icon/arrow-left.png";
 import likeIcon from "../assets/img/icon/like-icon.png";
 import Axios from "axios";
-import { countUpAction, countDownAction } from "../redux/actionCreators/count";
 // import Chat from "./ChatDetail";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 const url = process.env.REACT_APP_BASE_URL;
-const socket = io.connect(url);
+// const socket = io.connect(url);
 
 class VehicleDetail extends Component {
   state = {
@@ -25,37 +24,37 @@ class VehicleDetail extends Component {
     price: "",
     capacity: "",
     category: "",
-    room: "",
+    // room: "",
     showChat: false,
   };
-  joinRoom = () => {
-    if (this.state.room !== "") {
-      socket.emit("join_room", this.state.room);
-      // setShowChat(true);
-    }
-  };
+  // joinRoom = () => {
+  //   if (this.state.room !== "") {
+  //     socket.emit("join_room", this.state.room);
+  //     setShowChat(true);
+  //   }
+  // };
   componentDidMount() {
     const propsVehicleId = this.props.match.params.id;
     Axios.get(`${url}/vehicles/${propsVehicleId}`)
       .then(({ data }) => {
         const dataResult = data.result[0];
-        const createRoom = [
-          dataResult.vehicleOwnerId,
-          this.props.reduxState.auth.authInfo.userId,
-          dataResult.vehicleId,
-        ].join("");
+        // const createRoom = [
+        //   dataResult.vehicleOwnerId,
+        //   this.props.reduxState.auth.authInfo.userId,
+        //   dataResult.vehicleId,
+        // ].join("");
         this.setState({
-          id: dataResult.vehicleId,
-          quantity: dataResult.vehicleQuantity,
-          city: dataResult.vehicleCity,
-          name: dataResult.vehicleName,
-          image: dataResult.vehicleImage,
-          address: dataResult.vehicleAddress,
-          capacity: dataResult.vehicleCapacity,
-          price: dataResult.vehiclePrice,
-          category: dataResult.vehicleNameType,
-          ownerId: dataResult.vehicleOwnerId,
-          room: createRoom,
+          id: dataResult.id,
+          quantity: dataResult.quantity,
+          city: dataResult.city,
+          name: dataResult.name,
+          image: dataResult.image,
+          address: dataResult.address,
+          capacity: dataResult.capacity,
+          price: dataResult.price,
+          category: dataResult.type,
+          ownerId: dataResult.ownerId,
+          // room: createRoom,
         });
       })
       .catch((err) => {
@@ -66,7 +65,6 @@ class VehicleDetail extends Component {
   render() {
     const pic = this.state.image;
     const { reduxState } = this.props;
-    console.log(this.state.room);
     return (
       <>
         <Header />
@@ -220,18 +218,5 @@ const mapStateToProps = (reduxState) => {
     reduxState,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    countUp: () => {
-      dispatch(countUpAction());
-    },
-    countDown: () => {
-      dispatch(countDownAction());
-    },
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(VehicleDetail));
+export default connect(mapStateToProps)(withRouter(VehicleDetail));

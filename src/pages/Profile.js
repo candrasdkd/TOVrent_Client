@@ -18,10 +18,10 @@ class Profile extends React.Component {
     address: "",
     phone: "",
     userName: "",
-    dob: new Date(),
+    dob: new Date(this.props.auth.authInfo.DOB).toLocaleDateString("en-CA"),
     files: "",
-    profilePic: this.props.auth.authInfo.userImage
-      ? url + this.props.auth.authInfo?.userImage
+    profilePic: this.props.auth.authInfo.image
+      ? url + this.props.auth.authInfo?.image
       : defaultImage,
     modalShow: false,
   };
@@ -34,35 +34,24 @@ class Profile extends React.Component {
   };
   updateProfileHandler = () => {
     const form = new FormData();
-    form.append(
-      "email",
-      this.state.email || this.props.auth.authInfo.userEmail
-    );
-    form.append(
-      "picture",
-      this.state.files || this.props.auth.authInfo.userImage
-    );
-    form.append(
-      "gender",
-      this.state.gender || this.props.auth.authInfo.userGender
-    );
+    form.append("email", this.state.email || this.props.auth.authInfo.email);
+    form.append("picture", this.state.files || this.props.auth.authInfo.image);
+    form.append("gender", this.state.gender || this.props.auth.authInfo.gender);
     form.append(
       "address",
-      this.state.address || this.props.auth.authInfo.userAddress
+      this.state.address || this.props.auth.authInfo.address
     );
     form.append(
       "phone_number",
-      this.state.phone || this.props.auth.authInfo.userPhone
+      this.state.phone || this.props.auth.authInfo.phoneNumber
     );
     form.append(
       "full_name",
-      this.state.userName || this.props.auth.authInfo.userFullName
+      this.state.userName || this.props.auth.authInfo.fullName
     );
     form.append(
       "dob",
-      `${this.state.dob.getFullYear()}-${
-        this.state.dob.getMonth() + 1
-      }-${this.state.dob.getDate()}`
+      this.state.dob || this.props.auth.authInfo.DOB.toLocaleDateString("en-CA")
     );
     Swal.fire({
       title: "Do you want to save the changes?",
@@ -77,7 +66,7 @@ class Profile extends React.Component {
       if (result.isConfirmed) {
         this.props.updateProfile(
           form,
-          this.props.auth.authInfo.userId,
+          this.props.auth.authInfo.id,
           this.props.auth.token
         );
         Swal.fire({
@@ -128,13 +117,11 @@ class Profile extends React.Component {
                 }
               />
             </div>
-            <p className="profile-name">
-              {this.props.auth.authInfo.userFullName}
-            </p>
+            <p className="profile-name">{this.props.auth.authInfo.fullName}</p>
             <p className="profile-desc">
-              {this.props.auth.authInfo.userEmail}
+              {this.props.auth.authInfo.email}
               <br />
-              {this.props.auth.authInfo.userPhone}
+              {this.props.auth.authInfo.phoneNumber}
             </p>
             <div className="gender">
               <label className="gender-container">
@@ -142,9 +129,7 @@ class Profile extends React.Component {
                 <input
                   type="radio"
                   defaultChecked={
-                    this.props.auth.authInfo.userGender === "Male"
-                      ? "checked"
-                      : ""
+                    this.props.auth.authInfo.gender === "Male" ? "checked" : ""
                   }
                   name="radio"
                   onClick={() => {
@@ -158,7 +143,7 @@ class Profile extends React.Component {
                 <input
                   type="radio"
                   defaultChecked={
-                    this.props.auth.authInfo.userGender === "Female"
+                    this.props.auth.authInfo.gender === "Female"
                       ? "checked"
                       : ""
                   }
@@ -181,7 +166,7 @@ class Profile extends React.Component {
                 type="text"
                 id="email"
                 name="email"
-                defaultValue={this.props.auth.authInfo.userEmail}
+                defaultValue={this.props.auth.authInfo.email}
                 onChange={(e) => this.setState({ email: e.target.value })}
               />
               <label className="profile-fields-subtitle" htmlFor="address">
@@ -191,7 +176,7 @@ class Profile extends React.Component {
                 type="text"
                 id="address"
                 name="address"
-                defaultValue={this.props.auth.authInfo.userAddress}
+                defaultValue={this.props.auth.authInfo.address}
                 onChange={(e) => this.setState({ address: e.target.value })}
               />
               <label className="profile-fields-subtitle" htmlFor="mobile-num">
@@ -201,7 +186,7 @@ class Profile extends React.Component {
                 type="number"
                 id="mobile-num"
                 name="mobile-num"
-                defaultValue={this.props.auth.authInfo.userPhone}
+                defaultValue={this.props.auth.authInfo.phoneNumber}
                 onChange={(e) => this.setState({ phone: e.target.value })}
               />
             </div>
@@ -216,7 +201,7 @@ class Profile extends React.Component {
                     type="text"
                     name="dname"
                     className=""
-                    defaultValue={this.props.auth.authInfo.userFullName}
+                    defaultValue={this.props.auth.authInfo.fullName}
                     onChange={(e) =>
                       this.setState({ userName: e.target.value })
                     }
@@ -232,11 +217,9 @@ class Profile extends React.Component {
                   <input
                     type="date"
                     name="MM/DD/YY"
-                    defaultValue={new Date(
-                      this.props.auth.authInfo.userDOB
-                    ).toLocaleDateString("en-CA")}
+                    defaultValue={this.state.dob}
                     onChange={(e) => {
-                      this.setState({ dob: new Date(e.target.value) });
+                      this.setState({ dob: e.target.value });
                     }}
                   />
                 </div>
@@ -264,7 +247,7 @@ class Profile extends React.Component {
                   <EditPassword
                     show={this.state.modalShow}
                     close={() => this.setState({ modalShow: false })}
-                    id={this.props.auth.authInfo.userId}
+                    id={this.props.auth.authInfo.id}
                     token={this.props.auth.token}
                   />
                 </Link>

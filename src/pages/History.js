@@ -64,20 +64,20 @@ class History extends Component {
     const params =
       this.authInfo.authLevel === 3
         ? {
-            user_id: this.authInfo.user_id,
+            user_id: this.authInfo.id,
             keyword: this.state.search,
             filter_date: dateParams,
             sort: "DESC",
           }
         : {
-            owner_id: this.authInfo.user_id,
+            owner_id: this.authInfo.id,
             keyword: this.state.search,
             filter_date: dateParams,
             sort: "DESC",
           };
     getTransaction(params)
       .then((data) => {
-        // this.setState({ history: data.data.result.data });
+        // this.setState({ history: data.result[0] });
       })
       .catch((err) => {
         if (String(err).includes("404")) {
@@ -112,10 +112,11 @@ class History extends Component {
   };
 
   componentDidMount() {
-    const params = this.authInfo.userId;
+    const params = this.authInfo.id;
     const token = this.props.auth.token;
     getTransactionByUser(params, token)
       .then(({ data }) => {
+        console.log(data);
         return this.setState({
           history: data.result,
           loading: false,
@@ -128,6 +129,7 @@ class History extends Component {
   }
 
   render() {
+    console.log("tets", this.state.history);
     return (
       <div>
         <Header />
@@ -183,26 +185,27 @@ class History extends Component {
                 />
               </div>
               {this.state.history?.map((data, idx) => {
+                console.log("Data", data);
                 const currentDate = new Date();
                 if (
-                  new Date(data.historyStartDate) >=
+                  new Date(data.startDate) >=
                   new Date(currentDate.setDate(currentDate.getDate() - 1))
                 )
                   return (
                     <HistoryComponent
                       key={idx}
-                      id={data.historyId}
-                      vehicleId={data.vehicleId}
+                      id={data.id}
+                      // vehicleId={data.vehicleId}
                       vehicleName={data.vehicleName}
-                      rentStart={new Date(
-                        data.historyStartDate
-                      ).toLocaleDateString("en-CA")}
-                      rentFinish={new Date(
-                        data.historyExpiredDate
-                      ).toLocaleDateString("en-CA")}
-                      image={data.vehicleImage}
-                      price={data.historyPrice}
-                      transactionStatus={data.historyStatusId}
+                      rentStart={new Date(data.startDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      rentFinish={new Date(data.expiredDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      image={data.picture}
+                      price={data.totalPrice}
+                      transactionStatus={data.orderStatus}
                       authLevel={this.authInfo.authLevel}
                     />
                   );
@@ -221,26 +224,26 @@ class History extends Component {
               {this.state.history?.map((data, idx) => {
                 const currentDate = new Date();
                 if (
-                  new Date(data.historyStartDate) <=
+                  new Date(data.startDate) <=
                     new Date(currentDate.setDate(currentDate.getDate() - 1)) &&
-                  new Date(data.historyStartDate) >=
+                  new Date(data.startDate) >=
                     new Date(currentDate.setDate(currentDate.getDate() - 7))
                 )
                   return (
                     <HistoryComponent
                       key={idx}
-                      id={data.historyId}
-                      vehicleId={data.vehicleId}
+                      id={data.id}
+                      // vehicleId={data.vehicleId}
                       vehicleName={data.vehicleName}
-                      rentStart={new Date(
-                        data.historyStartDate
-                      ).toLocaleDateString("en-CA")}
-                      rentFinish={new Date(
-                        data.historyExpiredDate
-                      ).toLocaleDateString("en-CA")}
-                      image={data.vehicleImage}
-                      price={data.historyPrice}
-                      transactionStatus={data.historyStatusId}
+                      rentStart={new Date(data.startDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      rentFinish={new Date(data.expiredDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      image={data.picture}
+                      price={data.totalPrice}
+                      transactionStatus={data.orderStatus}
                       authLevel={this.authInfo.authLevel}
                     />
                   );
@@ -259,32 +262,36 @@ class History extends Component {
               {this.state.history?.map((data, idx) => {
                 const currentDate = new Date();
                 if (
-                  new Date(data.historyStartDate) <=
+                  new Date(data.startDate) <=
                   new Date(currentDate.setDate(currentDate.getDate() - 7))
                 )
                   return (
                     <HistoryComponent
                       key={idx}
-                      id={data.historyId}
-                      vehicleId={data.vehicleId}
+                      id={data.id}
+                      // vehicleId={data.vehicleId}
                       vehicleName={data.vehicleName}
-                      rentStart={new Date(
-                        data.historyStartDate
-                      ).toLocaleDateString("en-CA")}
-                      rentFinish={new Date(
-                        data.historyExpiredDate
-                      ).toLocaleDateString("en-CA")}
-                      image={data.vehicleImage}
-                      price={data.historyPrice}
-                      transactionStatus={data.historyStatusId}
+                      rentStart={new Date(data.startDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      rentFinish={new Date(data.expiredDate).toLocaleDateString(
+                        "en-CA"
+                      )}
+                      image={data.picture}
+                      price={data.totalPrice}
+                      transactionStatus={data.orderStatus}
                       authLevel={this.authInfo.authLevel}
                     />
                   );
                 return "";
               })}
-              <button className="delete-btn" onClick={this.deleteHandler}>
-                Delete selected item
-              </button>
+              {this.state.selectedHistory ? (
+                <button className="delete-btn" onClick={this.deleteHandler}>
+                  Delete selected item
+                </button>
+              ) : (
+                ""
+              )}
             </form>
           </div>
           <div className="new-arrival">

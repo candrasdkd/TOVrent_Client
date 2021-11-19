@@ -70,10 +70,8 @@ class Vehicles extends Component {
     getPerType(1);
     getPerType(2);
     getPerType(3);
-    // console.log(this.state.dataVehicles)
   }
   render() {
-    console.log(this.state.motorcycle);
     return (
       <>
         <Header />
@@ -114,34 +112,12 @@ class Vehicles extends Component {
               {" "}
               Search{" "}
             </button>
-            {/* {this.state.search.length > 0 ? (
-              <>
-                <h2 className="popular-title mt-5 mb-5">Search Result :</h2>
-                <div className="row justify-content-around align-items-center">
-                  {this.state.search?.map((data) => {
-                    return (
-                      <Card
-                        key={data.id}
-                        link={`/detail/${data.id}`}
-                        picture={url + data.picture.split(",")[0]}
-                        title={data.name}
-                        subtitle={data.city}
-                      />
-                    );
-                  })}
-                </div>
-              </>
-            ) : (
-              <h2 className="mt-5">
-                {this.state.searchError === 404 ? "Product Not Found" : ""}
-              </h2>
-            )} */}
           </div>
           <section className="vehicle-list">
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Popular in Town</div>
               <Link
-                to={`/view-more?type_id=${this.state.dataVehicles.id}`}
+                to={`/view-more?popular`}
                 className="text-view"
               >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>

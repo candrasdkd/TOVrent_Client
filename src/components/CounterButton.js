@@ -8,7 +8,7 @@ export default function CounterButton({
 }) {
   return (
     <div className="d-flex justify-content-between align-items-center flex-row reserve-amount">
-      <button className="rmv-btn" onClick={onClickRemove}>
+      <button disabled={disabled} className="rmv-btn" onClick={onClickRemove}>
         -
       </button>
       <div className="amount-added">{value}</div>

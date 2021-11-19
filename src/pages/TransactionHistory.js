@@ -15,19 +15,19 @@ class TransactionHistory extends Component {
   state = {
     transactionDetail: {},
     vehicleDetail: false,
-    historyMethod: "",
-    vehicleImage: "",
+    image: "",
     vehicleName: "",
     totalQuantity: 0,
     totalPrice: "",
-    userName: "",
-    userEmail: "",
-    userPhone: "",
-    historyCode: "",
-    historyLocation: "",
-    historyVehicleType: "",
-    historyStartDate: new Date(),
-    historyExpiredDate: new Date(),
+    name: "",
+    email: "",
+    phoneNumber: "",
+    bookingCode: "",
+    location: "",
+    category: "",
+    paymentMethod: "",
+    startDate: new Date(),
+    expiredDate: new Date(),
   };
 
   componentDidMount() {
@@ -39,19 +39,19 @@ class TransactionHistory extends Component {
         const dataResult = data.data.result[0];
         this.setState({
           vehicleDetail: true,
-          historyCode: dataResult.historyBookingCode,
-          historyVehicleType: dataResult.historyVehicleType,
-          historyStartDate: dataResult.historyStartDate,
-          historyExpiredDate: dataResult.historyExpiredDate,
-          historyMethod: dataResult.historyMethod,
+          image: dataResult.picture,
           vehicleName: dataResult.vehicleName,
-          vehicleImage: dataResult.vehicleImage,
-          totalQuantity: dataResult.historyQuantity,
-          historyLocation: dataResult.historyhistoryLocation,
-          totalPrice: dataResult.historyPrice,
-          userName: dataResult.userName,
-          userEmail: dataResult.userEmail,
-          userPhone: dataResult.userPhone,
+          totalQuantity: dataResult.totalQuantity,
+          location: dataResult.location,
+          totalPrice: dataResult.totalPrice,
+          category: dataResult.vehicleType,
+          name: dataResult.customer,
+          email: dataResult.email,
+          phoneNumber: dataResult.phoneNumber,
+          paymentMethod: dataResult.paymentMethod,
+          bookingCode: dataResult.bookingCode,
+          startDate: dataResult.startDate,
+          expiredDate: dataResult.expiredDate,
         });
         // this.setState({
         //   paymentMethod: this.state.transactionDetail.payment_method,
@@ -89,6 +89,11 @@ class TransactionHistory extends Component {
       })
       .catch((err) => console.log(err));
   };
+  typeHandler = (typeId) => {
+    if (typeId === 1) return "Cars";
+    if (typeId === 2) return "Motorbike";
+    if (typeId === 3) return "Bike";
+  };
 
   render() {
     const monthNames = [
@@ -105,12 +110,12 @@ class TransactionHistory extends Component {
       "Nov",
       "Dec",
     ];
-    const month = monthNames[new Date(this.state.historyStartDate).getMonth()];
+    const month = monthNames[new Date(this.state.startDate).getMonth()];
     const days =
-      new Date(this.state.historyStartDate).getDate() +
+      new Date(this.state.startDate).getDate() +
       " - " +
-      new Date(this.state.historyExpiredDate).getDate();
-    const year = new Date(this.state.historyStartDate).getFullYear();
+      new Date(this.state.expiredDate).getDate();
+    const year = new Date(this.state.startDate).getFullYear();
     const url = process.env.REACT_APP_BASE_URL;
     return (
       <>
@@ -139,20 +144,20 @@ class TransactionHistory extends Component {
                   <img
                     className="payment-pic"
                     alt=""
-                    src={url + this.state.vehicleImage.split(",")[0]}
+                    src={url + this.state.image.split(",")[0]}
                   />
                 </div>
               </div>
               <div className="product-reserve payment-title-container ">
                 <p className="reserve-vehicle-name">
                   {this.state.vehicleName} <br />
-                  <span>{this.state.historyLocation}</span>
+                  <span>{this.state.location}</span>
                 </p>
-                <p className="booking-code">{this.state.historyCode}</p>
+                <p className="booking-code">{this.state.bookingCode}</p>
                 <button
                   className="booking-code-btn"
                   onClick={(e) => {
-                    navigator.clipboard.writeText(this.state.historyCode);
+                    navigator.clipboard.writeText(this.state.bookingCode);
                     Swal.fire({
                       icon: "success",
                       title: "Copied!",
@@ -170,7 +175,7 @@ class TransactionHistory extends Component {
               <div className="d-flex justify-content-between payment-row-1">
                 <div className="payment-quantity">
                   <b>Quantity :</b>
-                  {` ${this.state.totalQuantity} ${this.state.historyVehicleType}(s)`}
+                  {` ${this.state.totalQuantity} ${this.typeHandler(this.state.category)}(s)`}
                 </div>
                 <div className="reservation-date">
                   <b>Reservation Date:</b> {`${month} ${days} ${year}`}
@@ -182,7 +187,7 @@ class TransactionHistory extends Component {
                     <b>Order details :</b>
                   </p>
                   <div className="order-details mb-2">
-                    {`${this.state.totalQuantity} ${this.state.historyVehicleType}(s) : Rp. ${this.state.totalPrice}`}
+                    {`${this.state.totalQuantity} ${this.typeHandler(this.state.category)}(s) : Rp. ${this.state.totalPrice}`}
                   </div>
                   <p className="order-details-total fw-bold">
                     Total : {`Rp. ${this.state.totalPrice}`}
@@ -193,8 +198,8 @@ class TransactionHistory extends Component {
                     <b>Identity :</b>
                   </p>
                   <div className="payer-identity">
-                    <div>{`${this.state.userName} (${this.state.userPhone})`}</div>
-                    <div>{this.state.userEmail}</div>
+                    <div>{`${this.state.name} (${this.state.phoneNumber})`}</div>
+                    <div>{this.state.email}</div>
                   </div>
                 </div>
               </div>
@@ -202,11 +207,11 @@ class TransactionHistory extends Component {
                 <div className="d-flex payment-code-container align-items-center">
                   <div className="payment-code-title">Payment Code:</div>
                   <div className="payment-code d-flex justify-content-center align-items-center">
-                    <div className="flex-fill">{this.state.historyCode}</div>
+                    <div className="flex-fill">{this.state.bookingCode}</div>
                     <button
                       className="payment-copy"
                       onClick={(e) => {
-                        navigator.clipboard.writeText(this.state.historyCode);
+                        navigator.clipboard.writeText(this.state.bookingCode);
                         Swal.fire({
                           icon: "success",
                           title: "Copied!",
@@ -221,21 +226,21 @@ class TransactionHistory extends Component {
                   </div>
                 </div>
                 <select
-                  defaultValue={this.state.historyMethod}
+                  defaultValue={this.state.paymentMethod}
                   className="payment-methods"
                 >
-                  <option defaultValue={this.state.historyMethod} disabled>
-                    {this.state.historyMethod}
+                  <option defaultValue={this.state.paymentMethod} disabled>
+                    {this.state.paymentMethod}
                   </option>
                 </select>
-                <button
-                  className="finish-payment-btn"
-                  onClick={this.payButtonHandler}
-                  disabled
-                >
-                  Waiting Approved
-                </button>
               </div>
+              <button
+                className="finish-payment-btn mt-5"
+                onClick={this.payButtonHandler}
+                disabled
+              >
+                Waiting Approved
+              </button>
             </section>
           </main>
         )}

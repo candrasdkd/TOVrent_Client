@@ -36,7 +36,6 @@ class Vehicles extends Component {
   nextPage = () => {
     Axios.get(`${url}${this.state.nextPage}`)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           dataVehicles: data.result.data,
           nextPage: data.nextPage,

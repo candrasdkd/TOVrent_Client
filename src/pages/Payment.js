@@ -15,19 +15,19 @@ class Payment extends Component {
   state = {
     transactionDetail: {},
     vehicleDetail: false,
-    paymentMethod: "",
-    vehicleImage: "",
+    image: "",
     vehicleName: "",
     totalQuantity: 0,
     totalPrice: "",
-    userName: "",
-    userEmail: "",
-    userPhone: "",
-    historyCode: "",
-    historyLocation: "",
-    historyVehicleType: "",
-    historyStartDate: new Date(),
-    historyExpiredDate: new Date(),
+    name: "",
+    email: "",
+    phoneNumber: "",
+    bookingCode: "",
+    location: "",
+    category: "",
+    paymentMethod: "",
+    startDate: new Date(),
+    expiredDate: new Date(),
   };
 
   componentDidMount() {
@@ -36,22 +36,22 @@ class Payment extends Component {
     console.log(id);
     getTransactionByID(id, token)
       .then((data) => {
-        console.log(data)
         const dataResult = data.data.result[0];
         this.setState({
           vehicleDetail: true,
-          historyCode: dataResult.historyBookingCode,
-          historyVehicleType: dataResult.historyVehicleType,
-          historyStartDate: dataResult.historyStartDate,
-          historyExpiredDate: dataResult.historyExpiredDate,
+          image: dataResult.picture,
           vehicleName: dataResult.vehicleName,
-          vehicleImage: dataResult.vehicleImage,
-          totalQuantity: dataResult.historyQuantity,
-          historyLocation: dataResult.historyhistoryLocation,
-          totalPrice: dataResult.historyPrice,
-          userName: dataResult.userName,
-          userEmail: dataResult.userEmail,
-          userPhone: dataResult.userPhone,
+          totalQuantity: dataResult.totalQuantity,
+          location: dataResult.location,
+          totalPrice: dataResult.totalPrice,
+          category: dataResult.vehicleType,
+          name: dataResult.customer,
+          email: dataResult.email,
+          phoneNumber: dataResult.phoneNumber,
+          paymentMethod: dataResult.paymentMethod,
+          bookingCode: dataResult.bookingCode,
+          startDate: dataResult.startDate,
+          expiredDate: dataResult.expiredDate,
         });
         // this.setState({
         //   paymentMethod: this.state.transactionDetail.payment_method,
@@ -83,15 +83,18 @@ class Payment extends Component {
     });
     patchTransaction(id, body, token)
       .then(() => {
-        setTimeout(() => {
-          this.props.history.push("/");
-        }, 1000);
+        this.props.history.push("/history");
       })
       .catch((err) => console.log(err));
   };
 
+  typeHandler = (typeId) => {
+    if (typeId === 1) return "Cars";
+    if (typeId === 2) return "Motorbike";
+    if (typeId === 3) return "Bike";
+  };
+
   render() {
-    console.log(this.state.historyVehicleType)
     const monthNames = [
       "Jan",
       "Feb",
@@ -106,19 +109,24 @@ class Payment extends Component {
       "Nov",
       "Dec",
     ];
-    const month = monthNames[new Date(this.state.historyStartDate).getMonth()];
+    const month = monthNames[new Date(this.state.startDate).getMonth()];
     const days =
-      new Date(this.state.historyStartDate).getDate() +
+      new Date(this.state.startDate).getDate() +
       " - " +
-      new Date(this.state.historyExpiredDate).getDate();
-    const year = new Date(this.state.historyStartDate).getFullYear();
+      new Date(this.state.expiredDate).getDate();
+    const year = new Date(this.state.startDate).getFullYear();
     const url = process.env.REACT_APP_BASE_URL;
     return (
       <>
         <Header />
         {!this.state.vehicleDetail && (
           <div className="loader view-detail-loader">
-            <Loader type="TailSpin" color="#ffcd61" height={125} width={125} />
+            <Loader
+              category="TailSpin"
+              color="#ffcd61"
+              height={125}
+              width={125}
+            />
           </div>
         )}
         {this.state.vehicleDetail && (
@@ -140,20 +148,20 @@ class Payment extends Component {
                   <img
                     className="payment-pic"
                     alt=""
-                    src={url + this.state.vehicleImage.split(",")[0]}
+                    src={url + this.state.image.split(",")[0]}
                   />
                 </div>
               </div>
               <div className="product-reserve payment-title-container ">
                 <p className="reserve-vehicle-name">
                   {this.state.vehicleName} <br />
-                  <span>{this.state.historyLocation}</span>
+                  <span>{this.state.location}</span>
                 </p>
-                <p className="booking-code">{this.state.historyCode}</p>
+                <p className="booking-code">{this.state.bookingCode}</p>
                 <button
                   className="booking-code-btn"
                   onClick={(e) => {
-                    navigator.clipboard.writeText(this.state.historyCode);
+                    navigator.clipboard.writeText(this.state.bookingCode);
                     Swal.fire({
                       icon: "success",
                       title: "Copied!",
@@ -171,7 +179,8 @@ class Payment extends Component {
               <div className="d-flex justify-content-between payment-row-1">
                 <div className="payment-quantity">
                   <b>Quantity :</b>
-                  {` ${this.state.totalQuantity} ${this.state.historyVehicleType}(s)`}
+                  {` ${this.state.totalQuantity}`}&nbsp;
+                  {`${this.typeHandler(this.state.category)}s`}
                 </div>
                 <div className="reservation-date">
                   <b>Reservation Date :</b> {`${month} ${days} ${year}`}
@@ -183,7 +192,9 @@ class Payment extends Component {
                     <b>Order details :</b>
                   </p>
                   <div className="order-details mb-2">
-                    {`${this.state.totalQuantity} ${this.state.historyVehicleType}(s) : Rp. ${this.state.totalPrice}`}
+                    {`${this.state.totalQuantity} ${this.typeHandler(
+                      this.state.category
+                    )}s : Rp. ${this.state.totalPrice}`}
                   </div>
                   <p className="order-details-total fw-bold">
                     Total : {`Rp. ${this.state.totalPrice}`}
@@ -194,8 +205,8 @@ class Payment extends Component {
                     <b>Identity :</b>
                   </p>
                   <div className="payer-identity">
-                    <div>{`${this.state.userName} (${this.state.userPhone})`}</div>
-                    <div>{this.state.userEmail}</div>
+                    <div>{`${this.state.name} (${this.state.phoneNumber})`}</div>
+                    <div>{this.state.email}</div>
                   </div>
                 </div>
               </div>
@@ -205,11 +216,11 @@ class Payment extends Component {
                     <b>Payment Code :</b>
                   </div>
                   <div className="payment-code d-flex justify-content-center align-items-center">
-                    <div className="flex-fill">{this.state.historyCode}</div>
+                    <div className="flex-fill">{this.state.bookingCode}</div>
                     <button
                       className="payment-copy"
                       onClick={(e) => {
-                        navigator.clipboard.writeText(this.state.historyCode);
+                        navigator.clipboard.writeText(this.state.bookingCode);
                         Swal.fire({
                           icon: "success",
                           title: "Copied!",
@@ -223,29 +234,32 @@ class Payment extends Component {
                     </button>
                   </div>
                 </div>
-                <select
-                  value={this.state.paymentMethod || "title"}
-                  className="payment-methods"
-                  onChange={(e) => {
-                    this.setState({ paymentMethod: e.target.value });
-                  }}
-                >
-                  <option value="title" disabled>
-                    Select Payment Methods
-                  </option>
-                  <option value="Cash">Cash</option>
-                  <option value="Transfer">Transfer</option>
-                </select>
+                {this.props.auth.authInfo.authLevel === 3 ? (
+                  <select
+                    value={this.state.paymentMethod || "title"}
+                    className="payment-methods"
+                    onChange={(e) => {
+                      this.setState({ paymentMethod: e.target.value });
+                    }}
+                  >
+                    <option value="title" disabled>
+                      Select Payment Methods
+                    </option>
+                    <option value="Cash">Cash</option>
+                    <option value="Transfer">Transfer</option>
+                  </select>
+                ) : (
+                  <select
+                    defaultValue={this.state.paymentMethod}
+                    className="payment-methods"
+                  >
+                    <option defaultValue={this.state.paymentMethod} disabled>
+                      {this.state.paymentMethod}
+                    </option>
+                  </select>
+                )}
               </div>
               <div className="finish-payment-container">
-                {/* <p className="text-center pay-before">
-                  Pay Before :{" "}
-                  {new Date(
-                    newTimePost.setDate(newTimePost.getDate() + 1)
-                  ).toLocaleDateString("en-CA")}
-                  &nbsp;
-                  {newTimePost.toLocaleTimeString("en-US")}
-                </p> */}
                 <button
                   className="finish-payment-btn"
                   onClick={this.payButtonHandler}
