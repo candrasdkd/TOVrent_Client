@@ -17,6 +17,7 @@ class Search extends Component {
       location: "",
       type: "",
       sort: "",
+      error: "",
     };
   }
 
@@ -28,7 +29,9 @@ class Search extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({
+          error: String(err).includes(404),
+        });
       });
   };
 
@@ -43,7 +46,25 @@ class Search extends Component {
     if (this.state.type) {
       query += `type_id=${this.state.type}&`;
     }
-    this.props.history.push(`${query.slice(0, -1)}`);
+    if (this.state.sort === "1") {
+      query += `order_by=v.price&sort=ASC&`;
+    }
+    if (this.state.sort === "2") {
+      query += `order_by=v.price&sort=DESC&`;
+    }
+    if (this.state.sort === "3") {
+      query += `order_by=v.name&sort=ASC&`;
+    }
+    if (this.state.sort === "4") {
+      query += `order_by=v.name&sort=DESC&`;
+    }
+    this.setState({
+      error: false,
+    });
+    this.props.history.push({
+      pathname: "/search",
+      search: `${query.slice(0, -1)}`,
+    });
     this.axiosGet(query);
   };
 
@@ -53,12 +74,13 @@ class Search extends Component {
     let keyword = params.get("keyword");
     let location = params.get("location");
     let type = params.get("type_id");
+    let sort = params.get("order_by");
     this.setState({
       keyword: keyword,
       location: location,
       type: type,
+      sort: sort,
     });
-    console.log(querySearch);
     querySearch && this.axiosGet(querySearch);
   }
 
@@ -128,21 +150,25 @@ class Search extends Component {
                   this.setState({ sort: e.target.value });
                 }}
               >
-                <option value="Location" disabled>
-                  Location
+                <option value={"Sort By"} disabled>
+                  Sort By
                 </option>
-                <option value="Yogyakarta">Lowest price</option>
-                <option value="Kalimantan">Highest price</option>
-                <option value="Malang">A to Z</option>
-                <option value="Jakarta">Z to A</option>
+                <option value={1}>Lowest price</option>
+                <option value={2}>Highest price</option>
+                <option value={3}>A to Z</option>
+                <option value={4}>Z to A</option>
               </select>
             </div>
             <div className="d-flex justify-content-end">
-              <button className="btn-search-query" onClick={this.searchVehicleHandler}> Search </button>
+              <button
+                className="btn-search-query"
+                onClick={this.searchVehicleHandler}
+              >
+                {" "}
+                Search{" "}
+              </button>
             </div>
-            {this.props.location.search !==
-              "?keyword=&location=&type_id=&limit=15" &&
-            this.state.search.length > 0 ? (
+            {this.props.location.search !== "" && !this.state.error ? (
               <>
                 <h2 className="popular-title mt-5 mb-5">Search Result :</h2>
                 <div className="row justify-content-around align-items-center">

@@ -155,8 +155,8 @@ class VehicleDetail extends Component {
                 </div>
               </section>
               {reduxState.auth.authInfo.authLevel === 3 ? (
-                <section className="detail-btn-container d-lg-flex flex-lg-row justify-content-center">
-                  <Link to="/chat" className="chat-admin mt-2 px-3">
+                <section className="detail-btn-container">
+                  <Link to="/chat" className="chat-admin">
                     <button
                       className="chat-admin"
                       onClick={() => {
@@ -168,7 +168,7 @@ class VehicleDetail extends Component {
                   </Link>
                   <Link
                     to={`/reservation/${this.props.match.params.id}`}
-                    className="reserve-from-detail mt-2 px-3"
+                    className="reserve-from-detail"
                   >
                     {this.state.quantity !== 0 ? (
                       <button className="reserve-from-detail">
@@ -180,7 +180,7 @@ class VehicleDetail extends Component {
                       </button>
                     )}
                   </Link>
-                  <Link to="/reservation" className="like-btn mt-2 px-3">
+                  <Link to="/reservation" className="like-btn">
                     <button className="like-btn">
                       <img alt="" src={likeIcon}></img>Like
                     </button>

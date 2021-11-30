@@ -861,7 +861,7 @@ p.profile-desc {
 /******* ========== RESERVATION ========== *******/
 
 main.reserve-container {
-  padding: 69px 6%;
+  padding: 50px 6%;
 }
 .reservation-title {
   font-weight: 700;
@@ -1049,7 +1049,7 @@ input.reserve-date[type="date"],
   font-weight: 600;
 }
 /******* ========== VIEW MORE ========== *******/
-.pagination{
+.pagination {
   justify-content: center;
 }
 
@@ -1092,14 +1092,14 @@ main.vehicles-container {
 /******* ========== MORE DETAIL ========== *******/
 
 .detail-pic-container {
-  flex: 3;
+  flex: 2;
 }
 .more-detail-container {
   flex: 2;
 }
 .more-detail-big-pic {
-  width: 45vw;
-  height: 35vw;
+  width: 30vw;
+  height: 20vw;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
@@ -1113,8 +1113,8 @@ main.vehicles-container {
   width: 22px;
 }
 .more-detail-small-pic {
-  width: 233px;
-  height: 158px;
+  width: 15vw;
+  height: 10vw;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0px 0px 20px rgba(75, 71, 71, 0.25);
@@ -1136,7 +1136,21 @@ main.vehicles-container {
   font-size: 24px;
 }
 .detail-btn-container {
-  margin-top: 1rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.detail-btn-container > .chat-admin {
+  flex: 30%;
+  margin-right: 10px;
+}
+
+.detail-btn-container > .reserve-from-detail {
+  flex: 30%;
+  margin-right: 10px;
+}
+.detail-btn-container > .like-btn {
+  flex: 10%;
 }
 .detail-btn-container > a > button {
   transition: 0.3s;
@@ -1159,15 +1173,6 @@ button.like-btn > img {
   height: 52px;
   width: 52px;
   margin-right: 27px;
-}
-a.like-btn {
-  flex: 1.5;
-}
-a.reserve-from-detail {
-  flex: 3;
-}
-a.chat-admin {
-  flex: 3;
 }
 
 /******* ========== PAYMENT ========== *******/
@@ -1684,8 +1689,7 @@ footer {
   }
   .product-reserve {
     margin: 0;
-    align-self: center;
-    text-align: center;
+    text-align: left;
   }
   .login-background {
     background-size: cover;
@@ -1712,13 +1716,18 @@ footer {
     justify-content: center;
     flex-direction: row !important;
   }
-  .more-detail-big-pic {
-    width: 35vw;
-    height: 35vw;
-  }
   .more-detail-small-pic {
-    width: 117px;
-    height: 79px;
+    width: 25vw;
+    height: 20vw;
+  }
+  .more-detail-big-pic {
+    width: 50vw;
+    height: 40vw;
+  }
+
+  .more-detail-small-pic {
+    width: 20vw;
+    height: 15vw;
     margin: 0 0.5rem !important;
   }
   .footer-flex {
@@ -1817,6 +1826,30 @@ footer {
   .add-image-container {
     font-size: 0.75rem;
     margin-bottom: 1rem;
+  }
+  .product-reserve {
+    margin: 0;
+    text-align: left;
+  }
+  .detail-btn-container > .chat-admin {
+    flex: 100%;
+    margin-right: 0px;
+  }
+
+  .detail-btn-container > .reserve-from-detail {
+    flex: 100%;
+    margin-right: 0px;
+  }
+  .detail-btn-container > .like-btn {
+    flex: 100%;
+  }
+  .more-detail-small-pic {
+    width: 20vw;
+    height: 15vw;
+  }
+  .more-detail-big-pic {
+    width: 50vw;
+    height: 40vw;
   }
 }
 
@@ -1997,9 +2030,13 @@ footer {
   .chat-item {
     width: 75%;
   }
+  .more-detail-small-pic {
+    width: 20vw;
+    height: 15vw;
+  }
   .more-detail-big-pic {
-    width: 65vw;
-    height: 65vw;
+    width: 50vw;
+    height: 40vw;
   }
   .cam-container {
     width: 115px;
@@ -2029,6 +2066,18 @@ footer {
     margin-top: 0rem;
     margin-bottom: 1rem;
     margin-left: 0;
+  }
+  .detail-btn-container > .chat-admin {
+    flex: 100%;
+    margin-right: 0px;
+  }
+
+  .detail-btn-container > .reserve-from-detail {
+    flex: 100%;
+    margin-right: 0px;
+  }
+  .detail-btn-container > .like-btn {
+    flex: 100%;
   }
 }
 
@@ -2212,9 +2261,13 @@ footer {
   .search-form > input {
     padding: 0.5rem;
   }
+  .more-detail-small-pic {
+    width: 20vw;
+    height: 15vw;
+  }
   .more-detail-big-pic {
-    width: 75vw;
-    height: 75vw;
+    width: 50vw;
+    height: 40vw;
   }
   img.payment-pic {
     height: 55vw;
@@ -2249,5 +2302,17 @@ footer {
     margin-top: 0rem;
     margin-bottom: 1rem;
     margin-left: 0;
+  }
+  .detail-btn-container > .chat-admin {
+    flex: 100%;
+    margin-right: 0px;
+  }
+
+  .detail-btn-container > .reserve-from-detail {
+    flex: 100%;
+    margin-right: 0px;
+  }
+  .detail-btn-container > .like-btn {
+    flex: 100%;
   }
 }
