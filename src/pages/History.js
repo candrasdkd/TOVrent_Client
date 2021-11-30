@@ -62,15 +62,15 @@ class History extends Component {
         dateParams = "";
     }
     const params =
-      this.authInfo.authLevel === 3
+      this.props.auth.authInfo.authLevel === 3
         ? {
-            user_id: this.authInfo.id,
+            user_id: this.props.auth.authInfo.id,
             keyword: this.state.search,
             filter_date: dateParams,
             sort: "DESC",
           }
         : {
-            owner_id: this.authInfo.id,
+            owner_id: this.props.auth.authInfo.id,
             keyword: this.state.search,
             filter_date: dateParams,
             sort: "DESC",
@@ -112,11 +112,10 @@ class History extends Component {
   };
 
   componentDidMount() {
-    const params = this.authInfo.id;
+    const params = this.props.auth.authInfo.id;
     const token = this.props.auth.token;
     getTransactionByUser(params, token)
       .then(({ data }) => {
-        console.log(data);
         return this.setState({
           history: data.result,
           loading: false,
@@ -129,7 +128,6 @@ class History extends Component {
   }
 
   render() {
-    console.log("tets", this.state.history);
     return (
       <div>
         <Header />
@@ -185,7 +183,6 @@ class History extends Component {
                 />
               </div>
               {this.state.history?.map((data, idx) => {
-                console.log("Data", data);
                 const currentDate = new Date();
                 if (
                   new Date(data.startDate) >=
@@ -206,7 +203,7 @@ class History extends Component {
                       image={data.picture}
                       price={data.totalPrice}
                       transactionStatus={data.orderStatus}
-                      authLevel={this.authInfo.authLevel}
+                      authLevel={this.props.auth.authInfo.authLevel}
                     />
                   );
                 return "";
@@ -244,7 +241,7 @@ class History extends Component {
                       image={data.picture}
                       price={data.totalPrice}
                       transactionStatus={data.orderStatus}
-                      authLevel={this.authInfo.authLevel}
+                      authLevel={this.props.auth.authInfo.authLevel}
                     />
                   );
                 return "";
@@ -280,7 +277,7 @@ class History extends Component {
                       image={data.picture}
                       price={data.totalPrice}
                       transactionStatus={data.orderStatus}
-                      authLevel={this.authInfo.authLevel}
+                      authLevel={this.props.auth.authInfo.authLevel}
                     />
                   );
                 return "";

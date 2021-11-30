@@ -36,7 +36,7 @@ class Payment extends Component {
     console.log(id);
     getTransactionByID(id, token)
       .then((data) => {
-        const dataResult = data.data.result[0];
+        const dataResult = data.data.result;
         this.setState({
           vehicleDetail: true,
           image: dataResult.picture,
@@ -132,7 +132,7 @@ class Payment extends Component {
         {this.state.vehicleDetail && (
           <main className="reserve-container">
             <div className="reservation-title">
-              <Link to="/vehicles">
+              <Link to="/history">
                 <img src={backIcon} alt="" />
               </Link>
               <span>Payment</span>

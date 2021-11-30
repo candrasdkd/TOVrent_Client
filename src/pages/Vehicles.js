@@ -117,7 +117,10 @@ class Vehicles extends Component {
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Popular in Town</div>
               <Link
-                to={`/view-more?popular`}
+                to={{
+                  pathname: "/view-more/popular",
+                  state: { detail: "/popular" },
+                }}
                 className="text-view"
               >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
@@ -146,7 +149,13 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Cars</div>
-              <Link to={`/view-more?type_id=1`} className="text-view">
+              <Link
+                to={{
+                  pathname: "/view-more/car",
+                  state: { detail: "/car" },
+                }}
+                className="text-view"
+              >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
@@ -174,7 +183,13 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Motorcycle</div>
-              <Link to={`/view-more?type_id=2`} className="text-view">
+              <Link
+                to={{
+                  pathname: "/view-more/motorbike",
+                  state: { detail: "/motorbike" },
+                }}
+                className="text-view"
+              >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
@@ -201,7 +216,13 @@ class Vehicles extends Component {
             </div>
             <div className="d-flex justify-content-between popular-title-container">
               <div className="popular-title">Bike</div>
-              <Link to={`/view-more?type_id=2`} className="text-view">
+              <Link
+                to={{
+                  pathname: "/view-more/bike",
+                  state: { detail: "/bike" },
+                }}
+                className="text-view"
+              >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>

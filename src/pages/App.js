@@ -34,18 +34,11 @@ class AppWithRouter extends Component {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
+
             <Route path="/view-more">
               <ViewMore />
             </Route>
-            <Route path="/check-code">
-              <CheckCode />
-            </Route>
-            <Route path="/change-password">
-              <ChangePassword />
-            </Route>
+        
             <Route path="/vehicles">
               <Vehicles />
             </Route>
@@ -55,11 +48,20 @@ class AppWithRouter extends Component {
             <Route path="/search">
               <Search />
             </Route>
+            <AuthRoute path="/login">
+              <Login />
+            </AuthRoute>
             <AuthRoute path="/register">
               <Register />
             </AuthRoute>
             <AuthRoute path="/forgot">
               <ForgotPassword />
+            </AuthRoute>
+            <AuthRoute path="/check-code">
+              <CheckCode />
+            </AuthRoute>
+            <AuthRoute path="/change-password">
+              <ChangePassword />
             </AuthRoute>
             <PrivateRoute path="/profile">
               <Profile />
@@ -73,11 +75,11 @@ class AppWithRouter extends Component {
             <PrivateRoute path="/transaction-history/:id">
               <TransactionHistory />
             </PrivateRoute>
-            <PrivateRoute path="/chat">
-              <ChatDetail />
-            </PrivateRoute>
             <PrivateRoute path="/history">
               <History />
+            </PrivateRoute>
+            <PrivateRoute path="/chat">
+              <ChatDetail />
             </PrivateRoute>
             <PrivateRoute path="/add-vehicle">
               <AddVehicle />

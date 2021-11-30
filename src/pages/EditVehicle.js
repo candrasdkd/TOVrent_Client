@@ -41,21 +41,20 @@ function EditVehicle(props) {
     axios
       .get(`${url}/vehicles/${propsVehicleId}`)
       .then(({ data }) => {
-        console.log(data);
         setDataArray(data.result);
         const dataResult = data.result[0];
-        if (dataResult.vehicleImage) {
-          setFirstImageDisplay(dataResult.vehicleImage.split(",")[0]);
-          setSecondImageDisplay(dataResult.vehicleImage.split(",")[1]);
-          setThirdImageDisplay(dataResult.vehicleImage.split(",")[2]);
+        if (dataResult.image) {
+          setFirstImageDisplay(dataResult.image.split(",")[0]);
+          setSecondImageDisplay(dataResult.image.split(",")[1]);
+          setThirdImageDisplay(dataResult.image.split(",")[2]);
         }
-        setVehicleName(dataResult.vehicleName);
-        setvehicleLocation(dataResult.vehicleCity);
-        setvehicleLocationId(dataResult.vehicleCityId);
-        setVehiclePrice(dataResult.vehiclePrice);
-        setvehicleQuantity(dataResult.vehicleQuantity);
-        setvehicleNameType(dataResult.vehicleNameType);
-        switch (dataResult.vehicleNameType) {
+        setVehicleName(dataResult.name);
+        setvehicleLocation(dataResult.city);
+        setvehicleLocationId(dataResult.cityId);
+        setVehiclePrice(dataResult.price);
+        setvehicleQuantity(dataResult.quantity);
+        setvehicleNameType(dataResult.type);
+        switch (dataResult.type) {
           case "Cars":
             setvehicleTypeId("1");
             break;
@@ -105,15 +104,19 @@ function EditVehicle(props) {
     }
     dispatch(patchVehicleAction(propsVehicleId, form, reduxAuth.token));
     Swal.fire("Vehicle Added!", "", "success");
+    props.history.push(`/detail/${propsVehicleId}`);
   };
-  console.log(thirdImageDisplay);
+
   return (
     <>
       <Header />
       {dataArray.length > 0 ? (
         <main className="add-vehicle-main">
           <section className="d-flex reservation-title">
-            <Link to="/" className="d-flex align-items-center">
+            <Link
+              to={"/detail/" + propsVehicleId}
+              className="d-flex align-items-center"
+            >
               <img src={backIcon} alt="" />
             </Link>
             <span>Edit item</span>
@@ -224,7 +227,6 @@ function EditVehicle(props) {
                 value={vehicleName}
                 onChange={(value) => setVehicleName(value.target.value)}
               />
-
               <input
                 type="text"
                 name="vehicleDescription"

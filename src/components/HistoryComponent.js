@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import arrow from "../assets/img/icon/arrow-left.png";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import Loader from "react-loader-spinner";
 const url = process.env.REACT_APP_BASE_URL;
 function HistoryComponent({
@@ -21,7 +20,7 @@ function HistoryComponent({
         <div
           className="d-flex flex-grow-7 align-items-center"
           onClick={() => history.push(`/payment/${id}`)}
-          >
+        >
           <div className="flex-fill">
             Please finish your payment for {vehicleName}
           </div>
@@ -83,7 +82,7 @@ function HistoryComponent({
     );
   if (transactionStatus === 3)
     return (
-      <>
+      <div>
         <div className="d-flex history-item align-items-center">
           <div className="d-flex flex-grow-7 align-items-center">
             <div className="flex-fill">Your payment has been confirmed!</div>
@@ -94,7 +93,10 @@ function HistoryComponent({
           className="d-flex history-item align-items-center"
           id={"history" + id}
         >
-          <div className="d-flex flex-grow-7 history-item-row ">
+          <div
+            className="d-flex flex-grow-7 history-item-row "
+            onClick={() => history.push(`/transaction-history/${id}`)}
+          >
             {!image.split(",")[0] && (
               <Loader type="TailSpin" color="#ffcd61" height={80} width={80} />
             )}
@@ -130,7 +132,8 @@ function HistoryComponent({
             />
           </div>
         </div>
-      </>
+      </div>
     );
+  else return "";
 }
 export default withRouter(HistoryComponent);

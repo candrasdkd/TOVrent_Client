@@ -16,6 +16,7 @@ class Search extends Component {
       keyword: "",
       location: "",
       type: "",
+      sort: "",
     };
   }
 
@@ -66,60 +67,79 @@ class Search extends Component {
     let keyword = params.get("keyword");
     let location = params.get("location");
     let type = params.get("type_id");
+    let sort = params.get("sort");
     return (
       <>
         <Header />
         <main className="vehicles-container">
           <div
             autoComplete="off"
-            className="vehicle-form"
+            className="vehicle-search"
             onKeyPress={(event) => {
               event.key === "Enter" && this.searchVehicleHandler();
             }}
           >
-            <input
-              type="text"
-              defaultValue={keyword}
-              className="search-form"
-              placeholder="Search vehicle (ex. Honda)"
-              onChange={(e) =>
-                this.setState({
-                  keyword: e.target.value,
-                })
-              }
-            />
-            <input
-              type="text"
-              defaultValue={location}
-              className="location-form"
-              placeholder="Location (ex. Jakarta)"
-              onChange={(e) =>
-                this.setState({
-                  location: e.target.value,
-                })
-              }
-            />
-            <button
-              onClick={this.searchVehicleHandler}
-              className="btn-search-vehicle"
-            >
-              {" "}
-              Search{" "}
-            </button>
-            <select
-              defaultValue={type ? type : "Type"}
-              className="item3 bg-white"
-              onChange={(e) => {
-                this.setState({ type: e.target.value });
-              }}
-            >
-              <option value="Type" disabled>
-                Type
-              </option>
-              <option value="1">Car</option>
-              <option value="2">Motorcycle</option>
-              <option value="3">Bike</option>
-            </select>
+            <div className="d-flex justify-content-between">
+              <input
+                type="text"
+                defaultValue={keyword}
+                className="search"
+                placeholder="Search vehicle (ex. Honda)"
+                onChange={(e) =>
+                  this.setState({
+                    keyword: e.target.value,
+                  })
+                }
+              />
+              <select
+                defaultValue={location ? location : "Location"}
+                className="search-location bg-white"
+                onChange={(e) => {
+                  this.setState({ location: e.target.value });
+                }}
+              >
+                <option value="Location" disabled>
+                  Location
+                </option>
+                <option value="Yogyakarta">Yogyakarta</option>
+                <option value="Kalimantan">Kalimantan</option>
+                <option value="Malang">Malang</option>
+                <option value="Jakarta">Jakarta</option>
+                <option value="Bali">Bali</option>
+              </select>
+              <select
+                defaultValue={type ? type : "Type"}
+                className="search-type bg-white"
+                onChange={(e) => {
+                  this.setState({ type: e.target.value });
+                }}
+              >
+                <option value="Type" disabled>
+                  Type
+                </option>
+                <option value="1">Car</option>
+                <option value="2">Motorcycle</option>
+                <option value="3">Bike</option>
+              </select>
+              <select
+                defaultValue={sort ? sort : "Sort By"}
+                className="search-sort bg-white"
+                onChange={(e) => {
+                  this.setState({ sort: e.target.value });
+                }}
+              >
+                <option value="Location" disabled>
+                  Location
+                </option>
+                <option value="Yogyakarta">Lowest price</option>
+                <option value="Kalimantan">Highest price</option>
+                <option value="Malang">A to Z</option>
+                <option value="Jakarta">Z to A</option>
+              </select>
+            </div>
+            <div className="d-flex justify-content-end">
+              <button className="btn-search-query" onClick={this.searchVehicleHandler}> Search </button>
+            </div>
             {this.props.location.search !==
               "?keyword=&location=&type_id=&limit=15" &&
             this.state.search.length > 0 ? (

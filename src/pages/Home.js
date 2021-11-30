@@ -37,7 +37,7 @@ class Home extends Component {
       query += `location=${this.state.location}&`;
     }
     if (this.state.type) {
-      query += `type_id=${this.state.type}&`;
+      query += `type=${this.state.type}&`;
     }
     this.props.history.push(`${query.slice(0, -1)}`);
   }
@@ -82,7 +82,8 @@ class Home extends Component {
                   <option value="Yogyakarta">Yogyakarta</option>
                   <option value="Kalimantan">Kalimantan</option>
                   <option value="Malang">Malang</option>
-                  <option value="South Jakarta">South Jakarta</option>
+                  <option value="Jakarta">Jakarta</option>
+                  <option value="Bali">Bali</option>
                 </select>
                 <select
                   defaultValue="Type"
@@ -94,9 +95,9 @@ class Home extends Component {
                   <option value="Type" disabled>
                     Type
                   </option>
-                  <option value="1">Car</option>
-                  <option value="2">Motorcycle</option>
-                  <option value="3">Bicycle</option>
+                  <option value="Car">Car</option>
+                  <option value="Motorcycle">Motorcycle</option>
+                  <option value="Bike">Bicycle</option>
                 </select>
               </div>
               <div className="btn-search-container">
@@ -115,7 +116,13 @@ class Home extends Component {
               <div className="popular-title d-flex align-items-center justify-content-center">
                 Popular in Town
               </div>
-              <Link to={"/vehicles"} className="text-view">
+              <Link
+                to={{
+                  pathname: "/view-more/popular",
+                  state: { detail: "/popular" },
+                }}
+                className="text-view"
+              >
                 View all <span className="fw-bolder">&nbsp;&nbsp;&gt;</span>
               </Link>
             </div>
@@ -199,7 +206,7 @@ class Home extends Component {
                             cy="20"
                             r="17"
                             stroke="#D7D7D7"
-                            strokeWidth="3"
+                            strokeWidth="Bike"
                             fill="white"
                           />
                         </svg>

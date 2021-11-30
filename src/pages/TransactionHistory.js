@@ -33,10 +33,11 @@ class TransactionHistory extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     const token = this.props.auth.token;
-    console.log(id);
+    console.log("wow", id);
     getTransactionByID(id, token)
       .then((data) => {
-        const dataResult = data.data.result[0];
+        const dataResult = data.data.result;
+        console.log("pusing", dataResult);
         this.setState({
           vehicleDetail: true,
           image: dataResult.picture,
@@ -175,7 +176,9 @@ class TransactionHistory extends Component {
               <div className="d-flex justify-content-between payment-row-1">
                 <div className="payment-quantity">
                   <b>Quantity :</b>
-                  {` ${this.state.totalQuantity} ${this.typeHandler(this.state.category)}(s)`}
+                  {` ${this.state.totalQuantity} ${this.typeHandler(
+                    this.state.category
+                  )}(s)`}
                 </div>
                 <div className="reservation-date">
                   <b>Reservation Date:</b> {`${month} ${days} ${year}`}
@@ -187,7 +190,9 @@ class TransactionHistory extends Component {
                     <b>Order details :</b>
                   </p>
                   <div className="order-details mb-2">
-                    {`${this.state.totalQuantity} ${this.typeHandler(this.state.category)}(s) : Rp. ${this.state.totalPrice}`}
+                    {`${this.state.totalQuantity} ${this.typeHandler(
+                      this.state.category
+                    )}(s) : Rp. ${this.state.totalPrice}`}
                   </div>
                   <p className="order-details-total fw-bold">
                     Total : {`Rp. ${this.state.totalPrice}`}

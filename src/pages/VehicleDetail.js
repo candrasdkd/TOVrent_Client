@@ -191,7 +191,7 @@ class VehicleDetail extends Component {
                   <Link to="/" className="chat-admin mt-2 px-3">
                     <button className="chat-admin">Add to Homepage</button>
                   </Link>
-                  {(reduxState.auth.authInfo.userId === this.state.ownerId ||
+                  {(reduxState.auth.authInfo.id === this.state.ownerId ||
                     reduxState.auth.authInfo.authLevel === 1) && (
                     <Link
                       to={`/edit-vehicle/${this.state.id}`}

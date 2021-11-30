@@ -50,7 +50,7 @@ class Header extends Component {
     return (
       <>
         <header>
-          <Navbar bg="light" expand="lg">
+          <Navbar className="header" bg="light" expand="lg">
             <Navbar.Brand
               onClick={() => {
                 this.props.history.push("/");
@@ -207,7 +207,7 @@ class Header extends Component {
                             confirmButtonColor: "#d33",
                             cancelButtonColor: "#00000",
                             confirmButtonText: "Yes",
-                            reverseButtons:true,
+                            reverseButtons: true,
                           }).then((result) => {
                             if (result.isConfirmed) {
                               this.signOutHandler();

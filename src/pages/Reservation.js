@@ -89,7 +89,7 @@ class Reservation extends Component {
     };
     postTransactions(body, token)
       .then((data) => {
-        this.props.history.push(`/payment/${data.data.result[0].id}`);
+        this.props.history.push(`/payment/${data.data.result.id}`);
       })
       .catch((err) => {
         console.log(err);
