@@ -33,7 +33,7 @@ class Payment extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     const token = this.props.auth.token;
-    console.log(id);
+  
     getTransactionByID(id, token)
       .then((data) => {
         const dataResult = data.data.result;

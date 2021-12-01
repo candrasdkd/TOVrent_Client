@@ -33,11 +33,9 @@ class TransactionHistory extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     const token = this.props.auth.token;
-    console.log("wow", id);
     getTransactionByID(id, token)
       .then((data) => {
         const dataResult = data.data.result;
-        console.log("pusing", dataResult);
         this.setState({
           vehicleDetail: true,
           image: dataResult.picture,

@@ -29,7 +29,6 @@ class Vehicles extends Component {
     // let pageNumber = this.state.currentPage;
     Axios.get(`${url}${query}&page=${this.state.currentPage}`)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           dataVehicles: data.result.data,
           nextPage: data.result.nextPage,
@@ -82,7 +81,6 @@ class Vehicles extends Component {
       default:
         break;
     }
-    // console.log(config);
     config && this.axiosGet(config);
   }
   render() {
